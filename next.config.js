@@ -8,7 +8,7 @@ module.exports = {
     domains: [
       // add any domains that this site will serve images from, such as a CMS or CDN
       // example: "your-cms.com"
-      'localhost'
+      'p01--random-service-name--payloadcms-teste05--wriv-2xhr.code.run'
     ],
     deviceSizes: [
       cssVariables.breakpoints.s,
