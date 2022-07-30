@@ -12,7 +12,7 @@ const Posts: React.FC = (props) => {
   return (
     <ArchiveLayout
       collection="posts"
-      title="All posts"
+      title="All paasts"
       showDates
       showCategories
       {...props}

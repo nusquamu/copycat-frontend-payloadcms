@@ -31,6 +31,8 @@ export const ArchiveLayout: React.FC<{
     showCategories
   } = props;
 
+  // console.log("props", props);
+
   return (
     <Fragment>
       <Meta
@@ -44,7 +46,7 @@ export const ArchiveLayout: React.FC<{
               type: 'h1',
               children: [
                 {
-                  text: `All ${collection}`
+                  text: `All ${collection} (src\\layout\\Archive\\index.tsx)`
                 }
               ]
             }

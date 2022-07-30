@@ -10,7 +10,7 @@ import { isUsingOfflineData } from '@root/utilities/isUsingOfflineData';
 const Posts: React.FC = (props) => {
   return (
     <ArchiveLayout
-      title="All posts"
+      title="All poosts"
       collection="posts"
       showDates
       showCategories
