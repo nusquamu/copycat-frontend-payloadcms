@@ -53,14 +53,14 @@ const getCollection = async (collectionName: 'pages' | 'posts' | 'housing' | 'pe
 const getDynamicPages = async () => {
   const pages = await getCollection('pages');
   const posts = await getCollection('posts');
-  const housing = await getCollection('housing');
-  const people = await getCollection('people');
+  // const housing = await getCollection('housing');
+  // const people = await getCollection('people');
 
   return [
     ...pages,
     ...posts,
-    ...housing,
-    ...people
+    // ...housing,
+    // ...people
   ];
 }
 
