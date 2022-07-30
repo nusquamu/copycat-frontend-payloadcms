@@ -1,0 +1,31 @@
+@use "@scss/common" as *;
+
+.menuFeature {
+  position: relative;
+
+  &:hover {
+    &:local() {
+      .headline {
+        opacity: 0.5;
+
+        @include mid-break {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.headline {
+  transition: all car(--default-trans-time) linear;
+  margin: 0;
+}
+
+.headlineWrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - #{base(2)});
+  padding-top: base(0.5);
+  padding-right: base(0.5);
+}

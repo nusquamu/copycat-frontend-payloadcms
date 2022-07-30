@@ -1,0 +1,65 @@
+@use "@scss/common" as *;
+
+.text {
+  white-space: pre-wrap;
+}
+
+.richText {
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  // TODO: avoid doing this to video poster images
+  // not an issue currently since all video embeds within rich text nodes don't use poster images
+  img {
+    width: auto;
+  }
+}
+
+.headingColor {
+  &--white {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--color-white);
+    }
+  }
+}
+
+.isInverted {
+  & > *:not(h1, h2, h3, h4, h5, h6) {
+    color: var(--color-white);
+  }
+}
+
+.paragraph {
+  &:global() {
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+.anchor {
+  color: currentColor;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+.hr {
+  margin: base() 0;
+  @include mid-break {
+    margin: base(0.5) 0;
+  }
+}
+
+.indent {
+  padding-left: base(2);
+}

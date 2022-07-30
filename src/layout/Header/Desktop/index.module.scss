@@ -1,0 +1,93 @@
+@use "@scss/common" as *;
+
+$headerHeight: base(4);
+
+.headerOuter {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.headerInner {
+  position: relative;
+  height: $headerHeight;
+  margin-bottom: calc(#{$headerHeight} * -1);
+}
+
+.content {
+  position: relative;
+  height: 100%;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.logoNavWrapper {
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0; // flexbox quirk
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: base(1.25) 0;
+  width: base(6);
+  flex-shrink: 0;
+
+  @include extra-large-break {
+    width: base(5);
+  }
+}
+
+.logoAnchor {
+  display: flex;
+  align-items: center;
+  top: 1px;
+  position: relative;
+  color: currentColor;
+  will-change: color;
+  transition: color var(--default-trans-time) linear;
+}
+
+.controls {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-right: base(1);
+  }
+}
+
+.searchButton,
+.mainMenuButton {
+  @include button-reset;
+  will-change: opacity;
+  transition: opacity var(--default-trans-time) linear;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchDimmed,
+.closeDimmed {
+  opacity: 0.5;
+}
+
+.subsiteNav {
+  flex-shrink: 1;
+}

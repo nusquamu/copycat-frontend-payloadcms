@@ -1,0 +1,80 @@
+@use "@scss/common" as *;
+
+.footer {
+  background-color: var(--color-light-gray);
+  padding: base(4) 0;
+
+  @include mid-break {
+    padding: base(2) 0;
+  }
+}
+
+.blockContainer {
+  width: 100%;
+}
+
+.content {
+  & > *:not(:last-child) {
+    margin-bottom: base(2);
+  }
+
+  @include mid-break {
+    & > *:not(:last-child) {
+      margin-bottom: base();
+    }
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+
+  & > *:not(:last-child) {
+    margin-bottom: base(0.5);
+  }
+}
+
+.bottomNav {
+  & > *:not(:last-child) {
+    margin-bottom: base(0.5);
+  }
+}
+
+.contact {
+  @include small;
+
+  & > *:not(:last-child) {
+    margin-bottom: base(0.5);
+  }
+}
+
+.contactLink {
+  display: block;
+  color: currentColor;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.legal {
+  @include small;
+  display: flex;
+
+  & > *:not(:last-child) {
+    margin-right: base(0.5);
+  }
+
+  @include mid-break {
+    flex-direction: column;
+    justify-content: flex-start;
+
+    & > *:not(:last-child) {
+      margin-right: 0;
+      margin-bottom: base(0.5);
+    }
+  }
+}
+
+.legalLink {
+  text-decoration: underline;
+  font-weight: inherit;
+}
