@@ -42,6 +42,8 @@ export const getStaticProps: GetStaticProps = async () => {
       docs: DocFromCMS[]
     } = postsData;
 
+    console.log("totalDocs", totalDocs);
+
     if (totalDocs > 0) props = postsData
   } else notFound = true;
 
