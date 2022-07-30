@@ -9,7 +9,7 @@ import classes from './index.module.scss';
 // this adds consistency and safety to any links rendered through the app, in or outside a traditional button component
 
 export type HyperlinkProps = {
-  href: string
+  href?: string
   className?: string
   linkFromCMS?: LinkFromCMS
   onMouseEnter?: () => void
@@ -94,7 +94,7 @@ export const Hyperlink: React.FC<HyperlinkProps> = (props) => {
   };
 
   if (href) {
-    const hrefIsLocal = ['tel:', 'mailto:', '/'].some(prefix => href.startsWith(prefix));
+    const hrefIsLocal = ['tel:', 'mailto:', '/'].some(prefix => href?.startsWith(prefix));
 
     if (!hrefIsLocal) {
       try {

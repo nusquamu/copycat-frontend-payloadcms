@@ -108,7 +108,8 @@ export const ContentBlock: React.FC<ContentBlockType & {
                         buttons={links?.map(({ link }) => ({
                           className: classes.button,
                           linkFromCMS: link,
-                          appearance: 'text',
+                          href: link?.toString(),
+                          // appearance: 'asdf',
                           arrow: true
                         }))}
                       />

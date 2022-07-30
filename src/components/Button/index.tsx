@@ -9,7 +9,7 @@ export type ButtonAppearances = 'text' | 'primaryButton' | 'secondaryButton';
 export type ButtonProps = {
   className?: string,
   anchorClassName?: string
-  href: string
+  href?: string
   label?: string
   appearance?: ButtonAppearances
   color?: string

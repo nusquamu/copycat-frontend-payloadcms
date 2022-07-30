@@ -64,7 +64,7 @@ export const ResultRow: React.FC<{
 
   let href = formatSlug(
     newDoc,
-    currentCategory,
+    // currentCategory,
   );
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0;

@@ -145,7 +145,9 @@ export const ContentSlider: React.FC<ContentSliderBlockType & {
                               <div className={classes.slideLink}>
                                 <Button
                                   linkFromCMS={link}
+                                  // href={link?.url?.toString()}
                                   arrow
+                                  href={link?.url}
                                 />
                               </div>
                             )}
