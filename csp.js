@@ -7,6 +7,7 @@ const policies = {
     "'self'",
     // add any domains that this site will serve media from, such as a CMS or CDN
     // example: "https://your-cms.com",
+    "https://p01--random-service-name--payloadcms-teste05--wriv-2xhr.code.run",
   ],
   "img-src": [
     "'self'",
@@ -21,6 +22,7 @@ const policies = {
     "https://cdninstagram.com",
     'https://www.google-analytics.com',
     "*.cdninstagram.com",
+    "https://p01--random-service-name--payloadcms-teste05--wriv-2xhr.code.run",
   ],
   "style-src": [
     "'self'",
@@ -37,7 +39,8 @@ const policies = {
     "https://www.youtube.com",
     "https://assets.textrecruit.com",
     "https://vimeo.com",
-    "https://js.stripe.com/"
+    "https://js.stripe.com/",
+    "https://p01--random-service-name--payloadcms-teste05--wriv-2xhr.code.run",
   ],
   "script-src": [
     "'self'",
@@ -48,7 +51,8 @@ const policies = {
     "https://www.youtube.com",
     "https://www.googletagmanager.com",
     'https://www.google-analytics.com',
-    "https://js.stripe.com"
+    "https://js.stripe.com",
+    "https://p01--random-service-name--payloadcms-teste05--wriv-2xhr.code.run",
   ],
   "connect-src": [
     "'self'",
@@ -58,6 +62,7 @@ const policies = {
     "https://maps.googleapis.com",
     'https://www.google-analytics.com',
     "https://graph.instagram.com",
+    "https://p01--random-service-name--payloadcms-teste05--wriv-2xhr.code.run",
   ],
   "object-src": [
     "'self'",
