@@ -73,6 +73,10 @@ const Page: React.FC<DocFromCMS & {
                 <Fragment>
                     <Meta {...meta} />
                     <div id="page-content">
+                        <Fragment>
+                            <h1>{props.title}</h1>
+                        </Fragment>
+
                         <Hero {...hero} />
                         <Blocks blocks={layout} />
                     </div>
