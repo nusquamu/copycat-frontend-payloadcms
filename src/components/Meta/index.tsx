@@ -37,7 +37,7 @@ const Meta: React.FC<MetaType> = (props) => {
       {title && (
         <Fragment>
           <title>
-            {title}
+            {title} | {process.env.NEXT_PUBLIC_APP_NAME}
           </title>
           <meta
             property="og:title"
