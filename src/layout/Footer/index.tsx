@@ -52,7 +52,7 @@ export function Footer({ }) {
                 </Link>
                 
                 <Group className={classes.links}>
-
+                    Blue Dwarf Space Pty Ltd
                 </Group>
 
 
