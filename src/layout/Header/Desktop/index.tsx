@@ -1,217 +1,148 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { createStyles, Header, Container, Group, Burger, Paper, Transition } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { Logo } from '../../../components/Logo';
-import classes from './index.module.scss';
-import { ModalToggler, useModal } from '@faceless-ui/modal';
-import { SearchIcon } from '@root/icons/SearchIcon';
-import { Hamburger } from '@components/Hamburger';
-import { BlockContainer } from '../../BlockContainer';
-// import { SubsiteNav } from './SubsiteNav';
-// import { SubsiteMenu } from './SubsiteMenu';
-import { useWindowInfo } from '@faceless-ui/window-info'
-import { CloseIcon } from '@root/icons/CloseIcon';
-import { useScrollInfo } from '@faceless-ui/scroll-info';
-import { useHeaderHeight } from '@root/providers/HeaderHeight';
-import { useResize } from '@root/utilities/useResize';
-import { useRouter } from 'next/router';
-import { Hyperlink } from '@components/Hyperlink';
-import { BackgroundColor } from '@components/BackgroundColor';
 
-export const DesktopHeader: React.FC<{
-  className?: string
-}> = (props) => {
-  const {
-    className,
-  } = props;
+const HEADER_HEIGHT = 80;
 
-  const containerRef = useRef(null);
+const useStyles = createStyles((theme) => ({
+    root: {
+        position: 'relative',
+        zIndex: 1,
+    },
 
-  const {
-    setHeaderHeight,
-    reportStickyElement
-  } = useHeaderHeight();
+    dropdown: {
+        position: 'absolute',
+        top: HEADER_HEIGHT,
+        left: 0,
+        right: 0,
+        zIndex: 0,
+        borderTopRightRadius: 0,
+        borderTopLeftRadius: 0,
+        borderTopWidth: 0,
+        overflow: 'hidden',
 
-  const {
-    currentModal,
-    oneIsOpen: modalIsOpen,
-  } = useModal();
+        [theme.fn.largerThan('sm')]: {
+            display: 'none',
+        },
+    },
 
-  const { asPath } = useRouter();
+    header: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '100%',
+    },
 
-  // const [currentSubmenu, setCurrentSubmenu] = useState<undefined>();
-  const [showSubmenu, setShowSubmenu] = useState(false);
+    links: {
+        [theme.fn.smallerThan('sm')]: {
+            display: 'none',
+        },
+    },
 
-  const mainMenuIsOpen = currentModal === 'main-menu';
-  const searchIsOpen = currentModal === 'search';
+    burger: {
+        [theme.fn.largerThan('sm')]: {
+            display: 'none',
+        },
+    },
 
-  const bindEsc = useCallback((e: KeyboardEvent) => {
-    if (e.keyCode === 27) {
-      setShowSubmenu(false);
-    }
-  }, []);
+    link: {
+        display: 'block',
+        lineHeight: 1,
+        padding: '8px 12px',
+        borderRadius: theme.radius.sm,
+        textDecoration: 'none',
+        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+        fontSize: theme.fontSizes.sm,
+        fontWeight: 500,
 
-  useEffect(() => {
-    document.addEventListener('keydown', (e) => bindEsc(e), false);
-    return () => document.removeEventListener('keydown', (e) => bindEsc(e), false);
-  }, [bindEsc]);
+        '&:hover': {
+            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+        },
 
-  useEffect(() => {
-    if (modalIsOpen) setShowSubmenu(false);
-  }, [modalIsOpen])
+        [theme.fn.smallerThan('sm')]: {
+            borderRadius: 0,
+            padding: theme.spacing.md,
+        },
+    },
 
+    linkActive: {
+        '&, &:hover': {
+            backgroundColor: theme.fn.variant({
+                variant: 'light',
+                color: theme.primaryColor
+            }).background,
+            color: theme.fn.variant({
+                variant: 'light',
+                color: theme.primaryColor
+            }).color,
+        },
+    },
+}));
 
-  useEffect(() => {
-    setShowSubmenu(false);
-  }, [asPath])
+interface HeaderResponsiveProps {
+    links: { link: string; label: string }[];
+}
 
-  // const renderSubsiteNav = hasSubsite && !mainMenuIsOpen && !searchIsOpen;
+export function HeaderResponsive({ links }: HeaderResponsiveProps) {
+    const [opened, { toggle, close }] = useDisclosure(false);
+    const [active, setActive] = useState(links[0].link);
+    const { classes, cx } = useStyles();
 
-  const {
-    breakpoints: {
-      m: midBreak
-    } = {}
-  } = useWindowInfo();
-
-  const {
-    y: scrollY
-  } = useScrollInfo();
-
-  const [headerBackgroundColor, setHeaderBackgroundColor] = useState<string | undefined>();
-
-  useEffect(() => {
-    if (!midBreak) {
-      let newBGColor = 'transparent';
-
-      if (!modalIsOpen && scrollY > 0) {
-        newBGColor = 'light-gray';
-      }
-
-      setHeaderBackgroundColor(newBGColor)
-    }
-  }, [
-    modalIsOpen,
-    showSubmenu,
-    scrollY,
-  ]);
-
-  const { size } = useResize(containerRef);
-
-  useEffect(() => {
-    if (size) {
-      const { height } = size;
-      setHeaderHeight(height);
-      reportStickyElement({
-        name: 'header',
-        height
-      })
-    }
-  }, [
-    size,
-    setHeaderHeight,
-    reportStickyElement
-  ])
-
-  return (
-    <div
-      ref={containerRef}
-      className={[
-        className,
-        classes.headerOuter,
-      ].filter(Boolean).join(' ')}
-    >
-      <div
-        className={[
-          classes.headerInner,
-          // currentSubmenu && classes.subMenuIsOpen,
-        ].filter(Boolean).join(' ')}
-        onMouseLeave={() => {
-          if (!midBreak) setShowSubmenu(false)
-        }}
-      >
-        <BackgroundColor
-          className={classes.backgroundColor}
-          color={headerBackgroundColor}
-        />
-        <BlockContainer
-          className={[
-            classes.content,
-            // renderSubsiteNav && classes.hasSubsiteNav
-          ].filter(Boolean).join(' ')}
+    const items = links.map((link) => (
+        <a
+            key={link.label}
+            href={link.link}
+            className={cx(classes.link, { [classes.linkActive]: active === link.link })}
+            onClick={() => {
+                // onClick={(event) => {
+                // event.preventDefault();
+                setActive(link.link);
+                close();
+            }}
         >
-          <div className={classes.wrapper}>
-            <div className={classes.logoNavWrapper}>
-              <div className={classes.logoWrapper}>
-                <Hyperlink
-                  href="/"
-                  className={classes.logoAnchor}
-                  aria-label="Home link"
+            {link.label}
+        </a>
+    ));
+
+    return (
+        <Header
+            height={HEADER_HEIGHT}
+            mb={20}
+            className={classes.root}
+        >
+            <Container className={classes.header}>
+                <Logo />
+                <Group
+                    spacing={5}
+                    className={classes.links}
                 >
-                  <Logo />
-                </Hyperlink>
-              </div>
-              {/* {renderSubsiteNav && (
-                <SubsiteNav
-                  className={classes.subsiteNav}
-                  currentSubmenu={currentSubmenu}
-                  setCurrentSubmenu={setCurrentSubmenu}
-                  setShowSubmenu={setShowSubmenu}
-                  showSubmenu={showSubmenu}
-                  headerBackgroundColor={headerBackgroundColor}
-                  headerTextColor={headerTextColor}
+                    {items}
+                </Group>
+
+                <Burger
+                    opened={opened}
+                    onClick={toggle}
+                    className={classes.burger}
+                    size="sm"
                 />
-              )} */}
-            </div>
-            <div className={classes.controls}>
-              <div className={classes.control}>
-                <ModalToggler
-                  slug="search"
-                  className={[
-                    classes.searchButton,
-                    mainMenuIsOpen && classes.searchDimmed
-                  ].filter(Boolean).join(' ')}
-                  htmlAttributes={{
-                    'aria-label': 'Open or close search menu'
-                  }}
+
+                <Transition
+                    transition="pop-top-right"
+                    duration={200}
+                    mounted={opened}
                 >
-                  {!searchIsOpen ? (
-                    <SearchIcon
-                      bold
-                      color="black"
-                    />
-                  ) : (
-                    <CloseIcon
-                      bold
-                      color="white"
-                    />
-                  )}
-                </ModalToggler>
-              </div>
-              <div className={classes.control}>
-                <ModalToggler
-                  slug="main-menu"
-                  className={[
-                    classes.mainMenuButton,
-                    (searchIsOpen || showSubmenu) && classes.closeDimmed
-                  ].filter(Boolean).join(' ')}
-                  htmlAttributes={{
-                    'aria-label': 'Open or close main menu'
-                  }}
-                >
-                  <Hamburger
-                    isOpen={mainMenuIsOpen}
-                    color="black"
-                  />
-                </ModalToggler>
-              </div>
-            </div>
-          </div>
-        </BlockContainer>
-        {/* <SubsiteMenu
-          currentSubmenu={currentSubmenu}
-          setShowSubmenu={setShowSubmenu}
-          showSubmenu={showSubmenu}
-          headerBackgroundColor={headerBackgroundColor}
-        /> */}
-      </div >
-    </div>
-  )
+                    {(styles) => (
+                        <Paper
+                            className={classes.dropdown}
+                            withBorder
+                            style={styles}
+                        >
+                            {items}
+                        </Paper>
+                    )}
+                </Transition>
+            </Container>
+        </Header>
+    );
 }
