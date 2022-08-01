@@ -1,4 +1,5 @@
 import { createStyles, Group } from '@mantine/core';
+import Link from 'next/link';
 // import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons';
 // import { MantineLogo } from '@mantine/ds';
 import { Logo } from '../../components/Logo';
@@ -45,8 +46,11 @@ export function Footer({ }) {
     return (
         <div className={classes.footer}>
             <div className={classes.inner}>
-                <Logo kind='notext'  />
 
+                <Link href='/'>
+                    <a><Logo kind='notext' /></a>
+                </Link>
+                
                 <Group className={classes.links}>
 
                 </Group>
