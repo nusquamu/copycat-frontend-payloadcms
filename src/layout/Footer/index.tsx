@@ -26,7 +26,16 @@ const useStyles = createStyles((theme) => ({
             marginTop: theme.spacing.lg,
             marginBottom: theme.spacing.sm,
         },
+    },   
+
+    logoNoText: {
+        kind: 'notext',
     },
+
+    logoLetterhead: {
+        kind: 'letterhead',
+    },
+
 }));
 
 
@@ -36,7 +45,7 @@ export function Footer({ }) {
     return (
         <div className={classes.footer}>
             <div className={classes.inner}>
-                <Logo />
+                <Logo kind='notext'  />
 
                 <Group className={classes.links}>
 
