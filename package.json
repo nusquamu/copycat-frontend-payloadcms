@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
     "@faceless-ui/collapsibles": "^1.0.5",
     "@faceless-ui/css-grid": "^1.0.9",
     "@faceless-ui/modal": "^1.1.8",
@@ -16,6 +17,8 @@
     "@faceless-ui/slider": "^1.0.12",
     "@faceless-ui/window-info": "^2.0.4",
     "@googlemaps/js-api-loader": "^1.12.2",
+    "@mantine/core": "^5.0.2",
+    "@mantine/hooks": "^5.0.2",
     "@stripe/react-stripe-js": "^1.7.2",
     "@vimeo/player": "^2.16.1",
     "escape-html": "^1.0.3",
