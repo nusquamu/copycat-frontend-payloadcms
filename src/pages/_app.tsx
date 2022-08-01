@@ -27,129 +27,157 @@ import { SkipToContent } from '@root/layout/Header/SkipToContent';
 import { dummyGlobals } from '../../public/dummyData/dummyGlobals'
 import '../scss/app.scss';
 import { getAllGlobals } from '@root/cms/api';
+import { MantineProvider } from '@mantine/core';
 
 const MyApp = (appProps: AppProps & {
-  globals: IGlobals,
-  alerts: AlertsType
+    globals: IGlobals,
+    alerts: AlertsType
 }): React.ReactElement => {
-  const {
-    Component,
-    pageProps,
-    globals,
-    alerts
-  } = appProps;
+    const {
+        Component,
+        pageProps,
+        globals,
+        alerts
+    } = appProps;
 
-  const {
-    breadcrumbs,
-    // collection,
-    // id,
-    // preview,
-  } = pageProps;
+    const {
+        breadcrumbs,
+        // collection,
+        // id,
+        // preview,
+    } = pageProps;
 
-  // const router = useRouter();
+    // const router = useRouter();
 
-  // const onPreviewExit = useCallback(() => {
-  //   const exit = async () => {
-  //     const exitReq = await fetch('/api/exit-preview');
-  //     if (exitReq.status === 200) {
-  //       router.reload();
-  //     }
-  //   }
-  //   exit();
-  // }, [router])
+    // const onPreviewExit = useCallback(() => {
+    //   const exit = async () => {
+    //     const exitReq = await fetch('/api/exit-preview');
+    //     if (exitReq.status === 200) {
+    //       router.reload();
+    //     }
+    //   }
+    //   exit();
+    // }, [router])
 
-  return (
-    <CookiesProvider>
-      <AlertsProvider alerts={alerts}>
-        <NotificationsProvider>
-          <ScrollInfoProvider>
-            <GlobalsProvider {...globals}>
-              <WindowInfoProvider
-                breakpoints={{
-                  s: `(max-width: ${cssVariables.breakpoints.s}px)`,
-                  m: `(max-width: ${cssVariables.breakpoints.m}px)`,
-                  l: `(max-width: ${cssVariables.breakpoints.l}px)`,
-                  xl: `(max-width: ${cssVariables.breakpoints.xl}px)`,
-                }}
-              >
-                <GridProvider
-                  breakpoints={{
-                    s: cssVariables.breakpoints.s,
-                    m: cssVariables.breakpoints.m,
-                    l: cssVariables.breakpoints.l,
-                  }}
-                  rowGap={{
-                    s: '1rem',
-                    m: '1rem',
-                    l: '4rem',
-                    xl: '4rem',
-                  }}
-                  colGap={{
-                    s: '10px',
-                    m: '10px',
-                    l: '4rem',
-                    xl: '4rem',
-                  }}
-                  cols={{
-                    s: 8,
-                    m: 8,
-                    l: 14,
-                    xl: 16,
-                  }}
-                >
-                  <GutterProvider>
-                    <ModalProvider
-                      classPrefix="mywebsite"
-                      zIndex={9}
-                      transTime={250}
-                    >
-                      <BreadcrumbsProvider breadcrumbs={breadcrumbs}>
-                        <HeaderHeightProvider>
-                          <AppHead image={globals?.meta?.fallbackImage} />
-                          <GoogleTagManager />
-                          <GoogleAnalytics />
-                          <CloseModalOnRouteChange />
-                          <PageTransition>
-                            <SkipToContent />
-                            <AlertBar pageProps={pageProps} />
-                            <Header />
-                            <Component {...pageProps} />
-                            <Footer />
-                          </PageTransition>
-                          <ModalContainer />
-                          <MainMenu />
-                          <SearchModal popularSearchTerms={globals?.meta?.popularSearchTerms} />
-                        </HeaderHeightProvider>
-                      </BreadcrumbsProvider>
-                    </ModalProvider>
-                  </GutterProvider>
-                </GridProvider>
-              </WindowInfoProvider>
-            </GlobalsProvider>
-          </ScrollInfoProvider>
-        </NotificationsProvider>
-      </AlertsProvider>
-    </CookiesProvider>
-  )
+    return (
+        <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{
+                colorScheme: 'dark',
+                colors: {
+                    // override dark colors to change them for all components
+                    dark: [
+                        '#d5d7e0',
+                        '#acaebf',
+                        '#8c8fa3',
+                        '#666980',
+                        '#4d4f66',
+                        '#34354a',
+                        '#2b2c3d',
+                        '#1d1e30',
+                        '#0c0d21',
+                        '#01010a',
+                    ],
+                },
+            }}
+        >
+
+
+
+            <CookiesProvider>
+                <AlertsProvider alerts={alerts}>
+                    <NotificationsProvider>
+                        <ScrollInfoProvider>
+                            <GlobalsProvider {...globals}>
+                                <WindowInfoProvider
+                                    breakpoints={{
+                                        s: `(max-width: ${cssVariables.breakpoints.s}px)`,
+                                        m: `(max-width: ${cssVariables.breakpoints.m}px)`,
+                                        l: `(max-width: ${cssVariables.breakpoints.l}px)`,
+                                        xl: `(max-width: ${cssVariables.breakpoints.xl}px)`,
+                                    }}
+                                >
+                                    <GridProvider
+                                        breakpoints={{
+                                            s: cssVariables.breakpoints.s,
+                                            m: cssVariables.breakpoints.m,
+                                            l: cssVariables.breakpoints.l,
+                                        }}
+                                        rowGap={{
+                                            s: '1rem',
+                                            m: '1rem',
+                                            l: '4rem',
+                                            xl: '4rem',
+                                        }}
+                                        colGap={{
+                                            s: '10px',
+                                            m: '10px',
+                                            l: '4rem',
+                                            xl: '4rem',
+                                        }}
+                                        cols={{
+                                            s: 8,
+                                            m: 8,
+                                            l: 14,
+                                            xl: 16,
+                                        }}
+                                    >
+                                        <GutterProvider>
+                                            <ModalProvider
+                                                classPrefix="mywebsite"
+                                                zIndex={9}
+                                                transTime={250}
+                                            >
+                                                <BreadcrumbsProvider breadcrumbs={breadcrumbs}>
+                                                    <HeaderHeightProvider>
+                                                        <AppHead image={globals?.meta?.fallbackImage} />
+                                                        <GoogleTagManager />
+                                                        <GoogleAnalytics />
+                                                        <CloseModalOnRouteChange />
+                                                        <PageTransition>
+                                                            <SkipToContent />
+                                                            <AlertBar pageProps={pageProps} />
+                                                            <Header />
+                                                            <Component {...pageProps} />
+                                                            <Footer />
+                                                        </PageTransition>
+                                                        <ModalContainer />
+                                                        <MainMenu />
+                                                        <SearchModal popularSearchTerms={globals?.meta?.popularSearchTerms} />
+                                                    </HeaderHeightProvider>
+                                                </BreadcrumbsProvider>
+                                            </ModalProvider>
+                                        </GutterProvider>
+                                    </GridProvider>
+                                </WindowInfoProvider>
+                            </GlobalsProvider>
+                        </ScrollInfoProvider>
+                    </NotificationsProvider>
+                </AlertsProvider>
+            </CookiesProvider>
+
+        </MantineProvider>
+    )
 }
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
-  const appProps = await App.getInitialProps(appContext);
+    const appProps = await App.getInitialProps(appContext);
 
-  const useDummyData = process.env.NEXT_PUBLIC_OFFLINE_MODE;
+    const useDummyData = process.env.NEXT_PUBLIC_OFFLINE_MODE;
 
-  let globals: IGlobals;
+    let globals: IGlobals;
 
-  if (useDummyData) {
-    globals = dummyGlobals;
-  } else {
-    globals = await getAllGlobals();
-  }
+    if (useDummyData) {
+        globals = dummyGlobals;
+    } else {
+        globals = await getAllGlobals();
+    }
 
-  return {
-    ...appProps,
-    globals
-  };
+    return {
+        ...appProps,
+        globals
+    };
 };
 
 export default MyApp;
