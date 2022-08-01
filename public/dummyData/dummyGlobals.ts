@@ -103,17 +103,17 @@ export const dummyGlobals: IGlobals = {
     socialMediaLinks: [
       {
         platform: 'facebook',
-        url: 'https://www.facebook.com/',
-        label: 'Facebook',
+        url: 'https://www.facebook.com/bluedwarfspace',
+        label: 'Facepalmbook',
       },
       {
-        platform: 'instagram',
-        url: 'https://www.instagram.com/',
-        label: 'Instagram',
+        platform: 'twitter',
+        url: 'https://twitter.com/BlueDwarfSpace',
+        label: 'Twitter',
       },
       {
         platform: 'linkedin',
-        url: 'https://www.linkedin.com/',
+        url: 'https://www.linkedin.com/company/bluedwarfspace',
         label: 'LinkedIn',
       }
     ],
