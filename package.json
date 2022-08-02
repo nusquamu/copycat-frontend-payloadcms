@@ -20,7 +20,9 @@
     "@mantine/core": "^5.0.2",
     "@mantine/hooks": "^5.0.2",
     "@stripe/react-stripe-js": "^1.7.2",
+    "@tabler/icons": "^1.78.1",
     "@vimeo/player": "^2.16.1",
+    "@xstate/react": "^3.0.0",
     "escape-html": "^1.0.3",
     "flatley": "^5.2.0",
     "lodash.kebabcase": "^4.1.1",
@@ -35,7 +37,8 @@
     "react-transition-group": "^4.4.2",
     "sass": "^1.37.2",
     "sharp": "^0.29.2",
-    "slate": "^0.76.1"
+    "slate": "^0.76.1",
+    "xstate": "^4.32.1"
   },
   "devDependencies": {
     "@payloadcms/config-provider": "^1.0.1",

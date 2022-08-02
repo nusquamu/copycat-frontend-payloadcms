@@ -1,5 +1,5 @@
 import { assign, createMachine } from 'xstate';
-import { useMachine } from "@xstate/react";
+import { useMachine } from '@xstate/react';
 
 export interface MultiStepFormMachineContext {
     payeeInfo?: PayeeInfo;
@@ -108,26 +108,32 @@ const multiStepFormMachine =
         {
             services: { submitPayment: () => () => { } },
             actions: {
-                assignDateToContext: assign((context, event) => {
+                assignDateToContext: assign((_context, event) => {
                     if (event.type !== 'CONFIRM_DATE') return {};
                     return {
                         dateInfo: event.info,
                     };
                 }),
-                assignPayeeInfoToContext: assign((context, event) => {
+                assignPayeeInfoToContext: assign((_context, event) => {
                     if (event.type !== 'CONFIRM_PAYEE') return {};
                     return {
                         payeeInfo: event.info,
                     };
                 }),
-                assignErrorMessageToContext: assign((context, event: any) => {
+                assignErrorMessageToContext: assign((_context, event: any) => {
                     return {
                         errorMessage: event.data?.message || 'An unknown error occurred',
                     };
                 }),
-                clearErrorMessage: assign({
-                    errorMessage: undefined,
+                clearErrorMessage: assign((_context, _event: any) => {
+                    return {
+                        errorMessage: undefined,
+                    };
                 }),
+                    
+                    // clearErrorMessage: assign({
+                //     errorMessage: undefined,
+                // }),
             },
         },
     );
@@ -159,7 +165,8 @@ const MultiStepFormMachineComponent = () => {
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
                             </p>
-                            <button onClick={() => send("CONFIRM_PAYEE")}
+                            <button
+                                onClick={() => send("CONFIRM_PAYEE")}
                                 className="mt-4 inline-block p-[2px] rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:text-white active:text-opacity-75 focus:outline-none focus:ring"
                                 type="button"
                             >
@@ -179,7 +186,8 @@ const MultiStepFormMachineComponent = () => {
                                 T-bone doner bresaola chuck. Sirloin alcatra burgdoggen, swine flank chislic meatloaf tri-tip. Pancetta andouille shoulder, meatloaf shankle salami sausage hamburger. Tri-tip andouille shoulder ribeye.
                             </p>
                             <div className="inline-flex items-center -space-x-px text-xs rounded-md mt-4 mx-auto sm:pr-8">
-                                <button onClick={() => send("BACK")}
+                                <button
+                                    onClick={() => send("BACK")}
                                     className="px-5 py-3 border rounded-l-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:alert-success"
                                     type="button"
                                 >
@@ -193,7 +201,8 @@ const MultiStepFormMachineComponent = () => {
                                     Dunno
                                 </button>
 
-                                <button onClick={() => send("CONFIRM_DATE")}
+                                <button
+                                    onClick={() => send("CONFIRM_DATE")}
                                     className="px-5 py-3 font-medium border rounded-r-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:alert-error active:opacity-75"
                                     type="button"
                                 >

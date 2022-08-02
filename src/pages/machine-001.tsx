@@ -1,8 +1,12 @@
 import { createMachine } from "xstate";
 import { useMachine } from "@xstate/react";
+import { createStyles, Title, Button, Container } from '@mantine/core';
+import { Alert } from '@mantine/core';
+import { IconAlertCircle } from '@tabler/icons';
+import { Center } from '@mantine/core';
 
 const promiseMachine =
-    /** @xstate-layout N4IgpgJg5mDOIC5QAcBOB7AtgS1mAdMmAHYTbFQDEASgKIDKA8gDIBqtiK6s2ALtumKcQAD0QAWAAz5Jk8fIBMARkkBmABwB2JevEAaEAE9EAWgUA2fOICcq1QFZ1q8TvULxAXw8G0WXASJScio6AClaAGEAFWFkbj4BISRRCWlZeXFlNS0dfSMJBStza3N1FU1ZVWtxdXsvbxBidAg4WIwcPEISMgpY+P5BYTEEE01CjVd1a00yuXV1A2MR9xlJCutrJWsLZ08G3w6CVDh0ABsAN0g+ngGk0GGlcyV8a3s5e3MNORVJc0XTVSFGzWNSqSSbcz2FyqLw+dr+fDHABWYAAxrwrsk4jdEkNEI9nq93p91N9ZH98ghVJZxOYpHJNF9JApHOZYSADv5rglBslhiYSvgJvMpjMVDUFpSTOKipo5eZmWs6U56h4gA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QAcBOB7AtgS1mAdMmAHYTbFQDEASgKIDKA8gDIBqtiK6s2ALtumKcQAD0QBGAKwAWfAGYAHADY5AdnEqZABi3jVAGhABPRAE5J+U6unS50rQvXircgL6vDaLLgJFS5KjoAKVoAYQAVYWRuPgEhJFEJGXllNQ05bV0DYwklWVM1aVMlU1KZDQAmdw8QYnQIOCiMHDxCEjIKKJj+QWExBGkKwxMEUwV8aSUtEsGK8QVJSSqarxaCVDh0ABsAN0gunh740H6K1SV5OQq1SVMz1Tni4cQFU0slRzlTSclxGy1JO5PM0fPgNgArMAAY14+wS0UOcT6iDOFzkVxud1UD2cSmeCCk4wK8w031Upi0FWmQJAqx8B1ivQS-Xm+Pm1VcQA */
     createMachine({
         id: "promise",
         initial: "pending",
@@ -27,92 +31,201 @@ const promiseMachine =
     });
 
 
-const SimpleMachineComponent = () => {
+
+
+
+
+
+
+
+
+const useStyles = createStyles((theme) => ({
+    wrapper: {
+        position: 'relative',
+        paddingTop: 120,
+        paddingBottom: 80,
+
+        '@media (max-width: 755px)': {
+            paddingTop: 80,
+            paddingBottom: 60,
+        },
+    },
+
+    inner: {
+        position: 'relative',
+        zIndex: 1,
+    },
+
+    dots: {
+        position: 'absolute',
+        color: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
+
+        '@media (max-width: 755px)': {
+            display: 'none',
+        },
+    },
+
+    dotsLeft: {
+        left: 0,
+        top: 0,
+    },
+
+    title: {
+        textAlign: 'center',
+        fontWeight: 800,
+        fontSize: 40,
+        letterSpacing: -1,
+        color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+        marginBottom: theme.spacing.xs,
+        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+
+        '@media (max-width: 520px)': {
+            fontSize: 28,
+            textAlign: 'left',
+        },
+    },
+
+    highlight: {
+        color: theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 4 : 6],
+    },
+
+    description: {
+        textAlign: 'center',
+
+        '@media (max-width: 520px)': {
+            textAlign: 'left',
+            fontSize: theme.fontSizes.md,
+        },
+    },
+
+    controls: {
+        marginTop: theme.spacing.lg,
+        display: 'flex',
+        justifyContent: 'center',
+
+        '@media (max-width: 520px)': {
+            flexDirection: 'column',
+        },
+    },
+
+    control: {
+        '&:not(:first-of-type)': {
+            marginLeft: theme.spacing.md,
+        },
+
+        '@media (max-width: 520px)': {
+            height: 42,
+            fontSize: theme.fontSizes.md,
+
+            '&:not(:first-of-type)': {
+                marginTop: theme.spacing.md,
+                marginLeft: 0,
+            },
+        },
+    },
+}));
+
+export function HeroText() {
     const [state, send] = useMachine(promiseMachine);
+    const { classes } = useStyles();
 
     console.log(state.value);
 
     return (
+        <Container
+            className={classes.wrapper}
+            size={800}
+            mt={-80}
+        >
 
-        <>
-            <div className="m-40">
+            <Title className={classes.title}>
+                State of the <span className={classes.highlight}>the machine</span> in realtime
+            </Title>
 
-                <div className="relative block p-8 border border-teal-800 shadow-xl rounded-xl" >
+            <Container
+                p={0}
+                mt={20}
+                size={600}
+            >
 
-                    <div className="mt-4 sm:pr-8">
-                        <svg
-                            className="w-8 h-8 sm:w-10 sm:h-10"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
+                {
+                    state.matches("pending") &&
+                    <Alert
+                        icon={<IconAlertCircle size={16} />}
+                        title="Pending"
+                        color="cyan"
+                        variant="outline"
+                    >
+                        Build more reliable software with AI companion. AI is also trained to detect lazy developers who do nothing and just complain on Twitter.
+                    </Alert>
+                }
+
+                {
+                    state.matches("resolved") &&
+                    <Alert
+                        icon={<IconAlertCircle size={16} />}
+                        title="Resolved"
+                        color="green"
+                        radius="md"
+                        variant="filled"
+                    >
+                        Bacon ipsum dolor amet turkey doner corned beef burgdoggen andouille beef. Kielbasa ball tip boudin ground round.
+                    </Alert>
+                }
+
+                {
+                    state.matches("rejected") &&
+                    <Alert
+                        icon={<IconAlertCircle size={16} />}
+                        title="Rejected"
+                        color="red"
+                        radius="xs"
+                        variant="filled"
+                    >
+                        The soothing and smoothing, anti-inflammatory and antioxidant-rich blend works with the gentle, natural AHA enzyme action of Australian Caviar Lime and the BHA deep-cleansing benefits of naturally-derived salicylic acid and astringent Australian Lemon Myrtle.
+                    </Alert>
+                }
+
+                {
+                    state.matches("pending") &&
+                    <Center style={{ height: 100 }}>
+
+                        <Button
+                            onClick={() => send("REJECT")}
+                            variant="outline"
+                            color="red"
+                            size="lg"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                            ></path>
-                        </svg>
+                            Reject
+                        </Button>
 
-                        <h3 className="my-4">State of the machine:</h3>
-
-                        {
-                            state.matches("pending") &&
-                            <div className="p-4 alert-info">
-                                {state.value}
-                            </div>
-                        }
-
-                        {
-                            state.matches("resolved") &&
-                            <div className="p-4 alert-success">
-                                {state.value}
-                            </div>
-                        }
-
-                        {
-                            state.matches("rejected") &&
-                            <div className="p-4 alert-error">
-                                {state.value}
-                            </div>
-                        }
-
-                        {
-                            state.matches("pending") &&
-                            <div className="inline-flex items-center -space-x-px text-xs rounded-md mt-4 mx-auto sm:pr-8">
-                                <button onClick={() => send("RESOLVE")}
-                                    className="px-5 py-3 border rounded-l-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:alert-success"
-                                    type="button"
-                                >
-                                    Resolve
-                                </button>
-
-                                <button
-                                    className="px-5 py-3 font-medium border hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:alert-info active:opacity-75"
-                                    type="button"
-                                >
-                                    Dunno
-                                </button>
-
-                                <button onClick={() => send("REJECT")}
-                                    className="px-5 py-3 font-medium border rounded-r-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:alert-error active:opacity-75"
-                                    type="button"
-                                >
-                                    Reject
-                                </button>
-                            </div>
-                        }
+                        <Button
+                            onClick={() => send("RESOLVE")}
+                            color="green"
+                            size="lg"
+                            ml={20}
+                        >
+                            Resolve
+                        </Button>
+                    </Center>
+                }
 
 
-                    </div>
-                </div>
+                <iframe
+                    src="https://stately.ai/viz/embed/0d2c96c6-afd5-4b72-a007-a396179c1551?mode=viz&panel=code&showOriginalLink=1&readOnly=1&pan=0&zoom=1.5&controls=0"
+                    sandbox="allow-same-origin allow-scripts"
+                    width={'100%'}
+                    height={300}
+                    frameBorder={0}
+                    style={{ marginTop: 20 }}
+                ></iframe>
 
-            </div>
-
-        </>
+            </Container>
+        </Container>
     );
 }
 
 
-export default SimpleMachineComponent;
+
+
+export default HeroText;
