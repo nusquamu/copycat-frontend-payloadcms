@@ -178,7 +178,7 @@ const multiStepFormMachine =
 
 
 import { createStyles, ThemeIcon, Progress, Text, Group, Badge, Paper, Container, Button, Title } from '@mantine/core';
-import { IconSwimming } from '@tabler/icons';
+import { IconRocketOff, IconRocket } from '@tabler/icons';
 
 const ICON_SIZE = 60;
 
@@ -228,10 +228,21 @@ const MultiStepFormMachineComponentStatsCard = () => {
                         size={ICON_SIZE}
                         radius={ICON_SIZE}
                     >
-                        <IconSwimming
-                            size={34}
-                            stroke={1.5}
-                        />
+                        {
+                            !state.matches("state080_success") &&
+                            <IconRocketOff
+                                size={34}
+                                stroke={1.5}
+                            />
+                        }
+
+                        {
+                            state.matches("state080_success") &&
+                            <IconRocket
+                                size={48}
+                                stroke={1.5}
+                            />
+                        }
                     </ThemeIcon>
 
                     <Title
