@@ -180,7 +180,7 @@ const multiStepFormMachine =
 
 
 
-import { createStyles, ThemeIcon, Progress, Text, Group, Badge, Paper, Container, Button, Title, Timeline } from '@mantine/core';
+import { ThemeIcon, Badge, Paper, Container, Button, Title, Timeline } from '@mantine/core';
 import { IconRocketOff, IconRocket, IconUser, IconCalendar, IconSend, IconBusinessplan, IconReport } from '@tabler/icons';
 import { done, error } from 'xstate/lib/actions';
 
@@ -209,8 +209,13 @@ const useStyles = createStyles((theme) => ({
 
 
 import { useState } from 'react';
-import next from 'next';
-import { stateOptions } from '@root/blocks/Form/State/options';
+
+
+import { createStyles, Avatar, Text, Group } from '@mantine/core';
+import { IconPhoneCall, IconAt } from '@tabler/icons';
+
+
+
 
 
 
@@ -319,6 +324,8 @@ const MultiStepFormMachineComponentStatsCard = () => {
                         active={timelineState}
                         lineWidth={4}
                         bulletSize={32}
+                        mt="xl"
+                        p="xl"
                     >
 
 
@@ -329,6 +336,71 @@ const MultiStepFormMachineComponentStatsCard = () => {
                             {
                                 state.matches("state020_enteringRocketeer") &&
                                 <div>
+
+
+
+                                    <Group noWrap m="lg">
+                                        <Avatar
+                                            src={'https://source.unsplash.com/random/?ugly,girl'}
+                                            size={94}
+                                            radius="md"
+                                        />
+                                        <div>
+                                            <Text
+                                                size="xs"
+                                                weight={700}
+                                                color="dimmed"
+                                            >
+                                                TOTALLY NOT A TERMINATOR
+                                            </Text>
+
+                                            <Text
+                                                size="lg"
+                                                weight={500}
+                                            >
+                                                Gordon Shumway
+                                            </Text>
+
+                                            <Group
+                                                noWrap
+                                                spacing={10}
+                                                mt={3}
+                                            >
+                                                <IconAt
+                                                    stroke={1.5}
+                                                    size={16}
+                                                    className={classes.icon}
+                                                />
+                                                <Text
+                                                    size="xs"
+                                                    color="dimmed"
+                                                >
+                                                    donkeypuncher@hotmail.com
+                                                </Text>
+                                            </Group>
+
+                                            <Group
+                                                noWrap
+                                                spacing={10}
+                                                mt={5}
+                                            >
+                                                <IconPhoneCall
+                                                    stroke={1.5}
+                                                    size={16}
+                                                    className={classes.icon}
+                                                />
+                                                <Text
+                                                    size="xs"
+                                                    color="dimmed"
+                                                >
+                                                    +61 867 5309
+                                                </Text>
+                                            </Group>
+                                        </div>
+                                    </Group>
+
+
+
                                     <Button
                                         onClick={() => {
                                             send("EVENT021_CONFIRM_ROCKETEER");
@@ -336,23 +408,11 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                         }
                                         }
                                     >
-                                        YES
+                                        Confirm space cadet details
                                     </Button>
                                 </div>
                             }
 
-                            <Text
-                                color="dimmed"
-                                size="sm"
-                            >You&apos;ve created new branch <Text
-                                variant="link"
-                                component="span"
-                                inherit
-                            >fix-notifications</Text> from master</Text>
-                            <Text
-                                size="xs"
-                                mt={4}
-                            >2 hours ago</Text>
                         </Timeline.Item>
 
 
@@ -366,30 +426,30 @@ const MultiStepFormMachineComponentStatsCard = () => {
                             title="Entering blast off date"
                         >
 
-{
-                        state.matches("state030_enteringDate") &&
-                        <div>
-                            <Button
-                                onClick={() => {
-                                    send("EVENT031_BACK");
-                                    prevStep();
-                                }
-                                }
-                            >
-                                NO
-                            </Button>
+                            {
+                                state.matches("state030_enteringDate") &&
+                                <div>
+                                    <Button
+                                        onClick={() => {
+                                            send("EVENT031_BACK");
+                                            prevStep();
+                                        }
+                                        }
+                                    >
+                                        NO
+                                    </Button>
 
-                            <Button
-                                onClick={() => {
-                                    send("EVENT032_CONFIRM_DATE");
-                                    nextStep();
-                                }
-                                }
-                            >
-                                YES
-                            </Button>
-                        </div>
-                    }
+                                    <Button
+                                        onClick={() => {
+                                            send("EVENT032_CONFIRM_DATE");
+                                            nextStep();
+                                        }
+                                        }
+                                    >
+                                        YES
+                                    </Button>
+                                </div>
+                            }
 
                         </Timeline.Item>
 
@@ -405,34 +465,31 @@ const MultiStepFormMachineComponentStatsCard = () => {
                         >
 
 
-{
-                        state.matches("state040_confirming_with_3rd_party.state050_confirming_idle") &&
-                        <div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
-                            </p>
+                            {
+                                state.matches("state040_confirming_with_3rd_party.state050_confirming_idle") &&
+                                <div>
 
-                            <Button
-                                onClick={() => {
-                                    send("EVENT051_BACK");
-                                    prevStep();
-                                }
-                                }
-                            >
-                                NO
-                            </Button>
+                                    <Button
+                                        onClick={() => {
+                                            send("EVENT051_BACK");
+                                            prevStep();
+                                        }
+                                        }
+                                    >
+                                        NO
+                                    </Button>
 
-                            <Button
-                                onClick={() => {
-                                    send("EVENT051_CONFIRM_ALL");
-                                    nextStep();
-                                }
-                                }
-                            >
-                                YES
-                            </Button>
-                        </div>
-                    }
+                                    <Button
+                                        onClick={() => {
+                                            send("EVENT051_CONFIRM_ALL");
+                                            nextStep();
+                                        }
+                                        }
+                                    >
+                                        YES
+                                    </Button>
+                                </div>
+                            }
 
                         </Timeline.Item>
 
@@ -450,34 +507,34 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
 
 
-{
-                        state.matches("state040_confirming_with_3rd_party.state060_confirming_submitting") &&
-                        <div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
-                            </p>
+                            {
+                                state.matches("state040_confirming_with_3rd_party.state060_confirming_submitting") &&
+                                <div>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
+                                    </p>
 
-                            <Button
-                                onClick={() => {
-                                    error("EVENT051_BACK");
-                                    prevStep();
-                                }
-                                }
-                            >
-                                NO
-                            </Button>
+                                    <Button
+                                        onClick={() => {
+                                            error("EVENT051_BACK");
+                                            prevStep();
+                                        }
+                                        }
+                                    >
+                                        NO
+                                    </Button>
 
-                            <Button
-                                onClick={() => {
-                                    done("EVENT061_SUBMIT");
-                                    nextStep();
-                                }
-                                }
-                            >
-                                YES
-                            </Button>
-                        </div>
-                    }
+                                    <Button
+                                        onClick={() => {
+                                            done("EVENT061_SUBMIT");
+                                            nextStep();
+                                        }
+                                        }
+                                    >
+                                        YES
+                                    </Button>
+                                </div>
+                            }
 
 
 
@@ -493,14 +550,14 @@ const MultiStepFormMachineComponentStatsCard = () => {
                             bullet={<IconBusinessplan />}
                         >
 
-{
-                        state.matches("state080_success") &&
-                        <div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
-                            </p>
-                        </div>
-                    }
+                            {
+                                state.matches("state080_success") &&
+                                <div>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
+                                    </p>
+                                </div>
+                            }
                         </Timeline.Item>
                     </Timeline>
 
