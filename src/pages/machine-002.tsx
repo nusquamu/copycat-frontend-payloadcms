@@ -35,6 +35,9 @@ export type MultiStepFormMachineEvent =
     | {
         type: 'EVENT051_BACK';
     }
+    | {
+        type: 'EVENT061_SUBMIT';
+    }
 
 const multiStepFormMachine =
     /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMVgAwEYsH0AnAewGMBrMTMQgMWMIFsA6VDbAJgLADtNCAljygAlMpWqEAxAFEAajIByAFSwcc+AMIB5RbQCSIgLL4R2zQGkZymTJGJQAB2KwBKAcR4OQAD0QBaAGYAVgB2ZjCADkDA0MCOADYEmMCAGhAATwDAyPCcUIBOHGDI4MCCyNycAF9q9LZMXAISCiowGnomVnRGwO4+GiEoABF2WQUVLECNACEAQUtvZ1d3T28-BH8cDmZ4jjisABZgw4TEnAv0rM2QncTD3KwEo4Sijlr6nuw8InE2joYLAa2D6+F4-CGo0w4yUqniWl0BmM+GGcxsSxcbg8XiQvmyXGYOEOHA4BVwp2CWCeVwCF0ChNCOASoRZh0OLIK5Q+IGBTV+rUknSBXyOBFIngAZgImEN8AB3NwAC3wgUIEHwjjQhBQGW67CwlPw4p4UplwnwAggABswDDJsENDo9IYTHMADJujErbHrbI4el9fYJfJcSnB0I0hD7cKVZ4cSLqMqU951Hkin4tCTtOiAvWNQ5iyXSxiyhUoZWq9Wa7W63mG42mkvmy02u2qB34eaLXHLLFrXEbArMUIPCocMIPYKUoqR-xs5iVTlVLCRApJCoJbm8jN-QW53kFo1Fs1QeVKlVqjVanV57DPI8m4uy2AAVwARiWUO5hFIIJ4wMwQgAG7EJQt58pm-w5l0B6Fo+J5nuWF5VtetYiveDZPuar4fm435QAgwFkBg2IANpYAAul6fY4qAGxBMUC6RFgRSUpECSHPEaSZIgzzBLsnIFMEHEbpE2xbumzS7tmQrgYemEIWWFaXtWN68hhx5NqeOGfvhUg0CQhDMI4VoYBK+6SfyWYAjBIryZppbnpWV41uBGnwVp+A6XhQyETwIGkCRnjkVRPaYqstF4psJzMAUoSrnF5Rkgk0ShAkkbxIczDBsySSVFgoQksEEn6juAoyRZ+r2R5jlIc5qkZL+-63uBZXWdBwpVXBja1cpKE1tREW+ps478WoxTlCy5TjhGPEIKuWDZSc7FiWoYnJLUqY8MQEBwN425SeVNmdY0XBggMgjCGIR2EINPoDtkhxDvsYRrmuXGJOlc3+JS-HCcERTMng8bsSVjRtVBsm8qC4KDMIUJgHd-Z0dkRxLeojJ5aETyRIcs4cPEC5ToV9xnEJCZg98h3tVDdndVhp5KchLlqSK9YOc21qI2F3rI1FQQA+jTLxccLG5ZGeD8TggPEgaxSvCylMQdJx1yfTilOSpqFuernneV+QxI5F9ExAkuzCWlTwEyOpyRpxOwFsTxS4yET2bqmB1WZDlX5rrvXMw14HYw+PXmuKjAmW0RvDUEzGEsJDwpcGHAFqEwSRnEAa4BxmWnInSsQ3utldSHDOIX1LPXE44X3SjmwFll8uJ+x2yp+nc0xMwJKkuS0YjmJBfU97xeNMxXkvqQpBwPAPM0THfT8YEZycYDUxnMyEu4DsU59Lg8XlEvg9e0XjDRw99fxvHHErcnbezmE4RlKcrwFOyYkE5t1RAA */
@@ -179,6 +182,7 @@ const multiStepFormMachine =
 
 import { createStyles, ThemeIcon, Progress, Text, Group, Badge, Paper, Container, Button, Title } from '@mantine/core';
 import { IconRocketOff, IconRocket } from '@tabler/icons';
+import { done, error } from 'xstate/lib/actions';
 
 const ICON_SIZE = 60;
 
@@ -291,17 +295,14 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
 
                     {
-                        state.matches("enteringRocketeer") &&
+                        state.matches("state020_enteringRocketeer") &&
                         <div>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
                             </p>
 
-                            <Button
-                                onClick={() => send("EVENT021_CONFIRM_ROCKETEER")}
-                                radius="md"
-                            >
-                                Confirm
+                            <Button onClick={() => send("EVENT021_CONFIRM_ROCKETEER")} >
+                                YES
                             </Button>
                         </div>
                     }
@@ -313,34 +314,69 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
 
                     {
-                        state.matches("enteringDate") &&
+                        state.matches("state030_enteringDate") &&
                         <div>
                             <p>
-                                Bacon ipsum dolor amet chicken t-bone picanha, andouille meatloaf ham hock short ribs meatball pork loin flank tongue brisket. Burgdoggen ham hock rump sirloin biltong. Doner turducken pork loin, beef shank cow sirloin bacon. Leberkas brisket filet mignon chislic. Strip steak sausage bacon tail, flank swine sirloin salami cow fatback shoulder tenderloin picanha corned beef andouille.<br />
-                                <br />
-                                T-bone doner bresaola chuck. Sirloin alcatra burgdoggen, swine flank chislic meatloaf tri-tip. Pancetta andouille shoulder, meatloaf shankle salami sausage hamburger. Tri-tip andouille shoulder ribeye.
+                                Bacon ipsum dolor amet chicken t-bone picanha, andouille meatloaf ham hock short ribs meatball pork loin flank tongue brisket. Burgdoggen ham hock rump sirloin biltong.
                             </p>
-                            <div className="inline-flex items-center -space-x-px text-xs rounded-md mt-4 mx-auto sm:pr-8">
-                                <Button
-                                    onClick={() => send("EVENT031_BACK")}
-                                >
-                                    Back
-                                </Button>
+                            <Button onClick={() => send("EVENT031_BACK")} >
+                                NO
+                            </Button>
 
-                                <Button>
-                                    Dunno
-                                </Button>
-
-                                <Button
-                                    onClick={() => send("EVENT032_CONFIRM_DATE")}
-                                >
-                                    Confirm
-                                </Button>
-                            </div>
+                            <Button onClick={() => send("EVENT032_CONFIRM_DATE")} >
+                                YES
+                            </Button>
                         </div>
                     }
 
 
+
+
+
+                    {
+                        state.matches("state050_confirming_idle") &&
+                        <div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
+                            </p>
+
+                            <Button onClick={() => send("EVENT051_BACK")} >
+                                NO
+                            </Button>
+
+                            <Button onClick={() => send("EVENT051_CONFIRM_ALL")} >
+                                YES
+                            </Button>
+                        </div>
+                    }
+
+
+
+                    {
+                        state.matches("state060_confirming_submitting") &&
+                        <div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
+                            </p>
+
+                            <Button onClick={() => error("EVENT051_BACK")} >
+                                NO
+                            </Button>
+
+                            <Button onClick={() => done("EVENT061_SUBMIT")} >
+                                YES
+                            </Button>
+                        </div>
+                    }
+
+{
+                        state.matches("state080_success") &&
+                        <div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
+                            </p>
+                        </div>
+                    }
 
 
 
