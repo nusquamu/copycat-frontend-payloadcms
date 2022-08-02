@@ -14,7 +14,7 @@ interface RocketeerInfo {
 }
 
 interface DateInfo {
-    preferredData: string;
+    preferredDate: string;
 }
 
 export type MultiStepFormMachineEvent =
@@ -40,7 +40,7 @@ export type MultiStepFormMachineEvent =
     }
 
 const multiStepFormMachine =
-    /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMVgAwEYsH0AnAewGMBrMTMQgMWMIFsA6VDbAJgLADtNCAljygAlMpWqEAxAFEAajIByAFSwcc+AMIB5RbQCSIgLL4R2zQGkZymTJGJQAB2KwBKAcR4OQAD0QBaAGYAVgB2ZjCADkDA0MCOADYEmMCAGhAATwDAyPCcUIBOHGDI4MCCyNycAF9q9LZMXAISCiowGnomVnRGwO4+GiEoABF2WQUVLECNACEAQUtvZ1d3T28-BH8cDmZ4jjisABZgw4TEnAv0rM2QncTD3KwEo4Sijlr6nuw8InE2joYLAa2D6+F4-CGo0w4yUqniWl0BmM+GGcxsSxcbg8XiQvmyXGYOEOHA4BVwp2CWCeVwCF0ChNCOASoRZh0OLIK5Q+IGBTV+rUknSBXyOBFIngAZgImEN8AB3NwAC3wgUIEHwjjQhBQGW67CwlPw4p4UplwnwAggABswDDJsENDo9IYTHMADJujErbHrbI4el9fYJfJcSnB0I0hD7cKVZ4cSLqMqU951Hkin4tCTtOiAvWNQ5iyXSxiyhUoZWq9Wa7W63mG42mkvmy02u2qB34eaLXHLLFrXEbArMUIPCocMIPYKUoqR-xs5iVTlVLCRApJCoJbm8jN-QW53kFo1Fs1QeVKlVqjVanV57DPI8m4uy2AAVwARiWUO5hFIIJ4wMwQgAG7EJQt58pm-w5l0B6Fo+J5nuWF5VtetYiveDZPuar4fm435QAgwFkBg2IANpYAAul6fY4qAGxBMUC6RFgRSUpECSHPEaSZIgzzBLsnIFMEHEbpE2xbumzS7tmQrgYemEIWWFaXtWN68hhx5NqeOGfvhUg0CQhDMI4VoYBK+6SfyWYAjBIryZppbnpWV41uBGnwVp+A6XhQyETwIGkCRnjkVRPaYqstF4psJzMAUoSrnF5Rkgk0ShAkkbxIczDBsySSVFgoQksEEn6juAoyRZ+r2R5jlIc5qkZL+-63uBZXWdBwpVXBja1cpKE1tREW+ps478WoxTlCy5TjhGPEIKuWDZSc7FiWoYnJLUqY8MQEBwN425SeVNmdY0XBggMgjCGIR2EINPoDtkhxDvsYRrmuXGJOlc3+JS-HCcERTMng8bsSVjRtVBsm8qC4KDMIUJgHd-Z0dkRxLeojJ5aETyRIcs4cPEC5ToV9xnEJCZg98h3tVDdndVhp5KchLlqSK9YOc21qI2F3rI1FQQA+jTLxccLG5ZGeD8TggPEgaxSvCylMQdJx1yfTilOSpqFuernneV+QxI5F9ExAkuzCWlTwEyOpyRpxOwFsTxS4yET2bqmB1WZDlX5rrvXMw14HYw+PXmuKjAmW0RvDUEzGEsJDwpcGHAFqEwSRnEAa4BxmWnInSsQ3utldSHDOIX1LPXE44X3SjmwFll8uJ+x2yp+nc0xMwJKkuS0YjmJBfU97xeNMxXkvqQpBwPAPM0THfT8YEZycYDUxnMyEu4DsU59Lg8XlEvg9e0XjDRw99fxvHHErcnbezmE4RlKcrwFOyYkE5t1RAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMVgAwEYsH0AnAewGMBrMTMQgMWMIFsA6VDbAJgLADtNCAljygAlMpWqEAxAFEAajIByAFSwcc+AMIB5RbQCSIgLL4R2zQGkZymTJGJQAB2KwBKAcR4OQAD0QBaAGYAVgB2ZjCADkDA0MCOADYEmMCAGhAATwDAyPCcUIBOHGDI4MCCyNycAF9q9LZMXAISCiowGnomVnRGwO4+GiEoABF2WQUVLECNACEAQUtvZ1d3T28-BH8cDmZ4jjisABZgw4TEnAv0rM2QncTD3KwEo4Sijlr6nuw8InE2joYLAa2D6+F4-CGo0w4yUqniWl0BmM+GGcxsSxcbg8XiQvmyXGYOEOHA4BVwp2CWCeVwCF0ChNCOASoRZh0OLIK5Q+IGBTV+rUknSBXyOBFIngAZgImEN8AB3NwAC3wgUIEHwjjQhBQGW67CwlPw4p4UplwnwAggABswDDJsENDo9IYTHMADJujErbHrbI4el9fYJfJcSnB0I0hD7cKVZ4cSLqMqU951Hkin4tCTtOiAvWNQ5iyXSxiyhUoZWq9Wa7W63mG42mkvmy02u2qB34eaLXHLLFrXEbArMUIPCocMIPYKUoqR-xs5iVTlVLCRApJCoJbm8jN-QW53kFo1Fs1QeVKlVqjVanV57DPI8m4uy2AAVwARiWUO5hFIIJ4wMwQgAG7EJQt58pm-w5l0B6Fo+J5nuWF5VtetYiveDZPuar4fm435QAgwFkBg2IANpYAAul6fY4qAGxBMUC6RFgRSUpECSHPEaSZIgzzBLsnIFMEHEbpE2xbumzS7tmQrgYemEIWWFaXtWN68hhx5NqeOGfvhUg0CQhDMI4VoYBK+6SfyWYAjBIryZppbnpWV41uBGnwVp+A6XhQyETwIGkCRnjkVRPaYqstF4psJzMAUoSrnF5Rkgk0ShAkkbxIczDBsySSVFgoQksEEn6juAoyRZ+r2R5jlIc5qkZL+-63uBZXWdBwpVXBja1cpKE1tREW+ps478WoxTlCy5TjhGPEIKuWDZSc7FiWoYnJLUqY8MQEBwN425SeVNmdY0XBggMgjCGIR2EINPoDtkhxDvsYRrmuXGJOlc3+JS-HCcERTMng8bsSVjRtVBsm8qC4KDMIUJgHd-Z0dkRxLeojJ5aETyRIcs4cPEC5ToV9xnEJCZg98h3tVDdndVhp5KchLlqSK9YOc21qI2F3rI1FQQA+jTLxccLG5ZGeD8TggPEgaxSvCylMQdJx1yfTilOSpqFuernneV+QxI5F9ExAkuzCWlTwEyOpyRpxOwFsTxS4yET2bqmB1WZDlX5rrvXMw14HYw+PXmuKjAmW0RvDUEzGEsJDwpcGHAFqEwSRnEAa4BxmWnInSsQ3utldSHDOIX1LPXE44X3SjmwFll8uJ+x2yp+nc0xMwJKkuSuOcvFNQe5ZkFFyd2DMV5L6kKQcDwDzNEx30-GBGcnGA1MZzMhLuA7FOfS4PF5QrwX1Pe0w0cPfX8bxxxK3J23s5hOEZSnIUrxFLkhybdUQA */
     createMachine<
         MultiStepFormMachineContext,
         MultiStepFormMachineEvent
@@ -180,8 +180,8 @@ const multiStepFormMachine =
 
 
 
-import { createStyles, ThemeIcon, Progress, Text, Group, Badge, Paper, Container, Button, Title } from '@mantine/core';
-import { IconRocketOff, IconRocket } from '@tabler/icons';
+import { createStyles, ThemeIcon, Progress, Text, Group, Badge, Paper, Container, Button, Title, Timeline } from '@mantine/core';
+import { IconRocketOff, IconRocket, IconUser, IconCalendar, IconSend, IconBusinessplan, IconReport } from '@tabler/icons';
 import { done, error } from 'xstate/lib/actions';
 
 const ICON_SIZE = 60;
@@ -207,12 +207,27 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
+
+import { useState } from 'react';
+import next from 'next';
+import { stateOptions } from '@root/blocks/Form/State/options';
+
+
+
 const MultiStepFormMachineComponentStatsCard = () => {
-    // export function StatsCard() {
     const [state, send] = useMachine(multiStepFormMachine);
 
     const { classes } = useStyles();
 
+    const [timelineState, setActive] = useState(0);
+
+    // const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
+    // const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+
+
+
+    const nextStep = () => setActive((current) => current + 1);
+    const prevStep = () => setActive((current) => current - 1);
 
 
     return (
@@ -252,122 +267,231 @@ const MultiStepFormMachineComponentStatsCard = () => {
                     <Title
                         order={1}
                         align='center'
-                    >Multi-step form machine component</Title>
+                    >Application form recombobulator</Title>
 
                     <Title
                         order={2}
                         align='center'
-                    ><Badge size="xl">State: {state.value.toString()}</Badge></Title>
-
-
-                    <Group
-                        position="apart"
-                        mt="xs"
                     >
-                        <Text
-                            size="sm"
-                            color="dimmed"
+                        <Badge
+                            size='md'
                         >
-                            Progress
-                        </Text>
-                        <Text
-                            size="sm"
-                            color="dimmed"
-                        >
-                            62%
-                        </Text>
-                    </Group>
+                            Part 13.4 of subsection 29 of the Rocketeer Act
+                        </Badge>
+                    </Title>
 
-                    <Progress
-                        value={62}
-                        mt={5}
-                    />
 
-                    <Group
-                        position="apart"
-                        mt="md"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <Timeline
+                        color="cyan"
+                        radius="md"
+                        active={timelineState}
+                        lineWidth={4}
+                        bulletSize={32}
                     >
-                        <Text size="sm">20 / 36 km</Text>
-                        <Badge size="sm">4 days left</Badge>
-                    </Group>
+
+
+                        <Timeline.Item
+                            bullet={<IconUser />}
+                            title={"Entering rocketeer information"}
+                        >
+                            {
+                                state.matches("state020_enteringRocketeer") &&
+                                <div>
+                                    <Button
+                                        onClick={() => {
+                                            send("EVENT021_CONFIRM_ROCKETEER");
+                                            nextStep();
+                                        }
+                                        }
+                                    >
+                                        YES
+                                    </Button>
+                                </div>
+                            }
+
+                            <Text
+                                color="dimmed"
+                                size="sm"
+                            >You&apos;ve created new branch <Text
+                                variant="link"
+                                component="span"
+                                inherit
+                            >fix-notifications</Text> from master</Text>
+                            <Text
+                                size="xs"
+                                mt={4}
+                            >2 hours ago</Text>
+                        </Timeline.Item>
 
 
 
 
-                    {
-                        state.matches("state020_enteringRocketeer") &&
-                        <div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
-                            </p>
-
-                            <Button onClick={() => send("EVENT021_CONFIRM_ROCKETEER")} >
-                                YES
-                            </Button>
-                        </div>
-                    }
 
 
 
+                        <Timeline.Item
+                            bullet={<IconCalendar />}
+                            title="Entering blast off date"
+                        >
 
-
-
-
-                    {
+{
                         state.matches("state030_enteringDate") &&
                         <div>
-                            <p>
-                                Bacon ipsum dolor amet chicken t-bone picanha, andouille meatloaf ham hock short ribs meatball pork loin flank tongue brisket. Burgdoggen ham hock rump sirloin biltong.
-                            </p>
-                            <Button onClick={() => send("EVENT031_BACK")} >
+                            <Button
+                                onClick={() => {
+                                    send("EVENT031_BACK");
+                                    prevStep();
+                                }
+                                }
+                            >
                                 NO
                             </Button>
 
-                            <Button onClick={() => send("EVENT032_CONFIRM_DATE")} >
+                            <Button
+                                onClick={() => {
+                                    send("EVENT032_CONFIRM_DATE");
+                                    nextStep();
+                                }
+                                }
+                            >
                                 YES
                             </Button>
                         </div>
                     }
 
+                        </Timeline.Item>
 
 
 
 
-                    {
-                        state.matches("state050_confirming_idle") &&
+
+
+                        <Timeline.Item
+                            title="Awaiting confirmation"
+                            bullet={<IconReport />}
+                            lineVariant="dashed"
+                        >
+
+
+{
+                        state.matches("state040_confirming_with_3rd_party.state050_confirming_idle") &&
                         <div>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
                             </p>
 
-                            <Button onClick={() => send("EVENT051_BACK")} >
+                            <Button
+                                onClick={() => {
+                                    send("EVENT051_BACK");
+                                    prevStep();
+                                }
+                                }
+                            >
                                 NO
                             </Button>
 
-                            <Button onClick={() => send("EVENT051_CONFIRM_ALL")} >
+                            <Button
+                                onClick={() => {
+                                    send("EVENT051_CONFIRM_ALL");
+                                    nextStep();
+                                }
+                                }
+                            >
                                 YES
                             </Button>
                         </div>
                     }
 
+                        </Timeline.Item>
 
 
-                    {
-                        state.matches("state060_confirming_submitting") &&
+
+
+
+
+
+                        <Timeline.Item
+                            title="Confirm and submit"
+                            bullet={<IconSend />}
+                            lineVariant="dashed"
+                        >
+
+
+
+{
+                        state.matches("state040_confirming_with_3rd_party.state060_confirming_submitting") &&
                         <div>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
                             </p>
 
-                            <Button onClick={() => error("EVENT051_BACK")} >
+                            <Button
+                                onClick={() => {
+                                    error("EVENT051_BACK");
+                                    prevStep();
+                                }
+                                }
+                            >
                                 NO
                             </Button>
 
-                            <Button onClick={() => done("EVENT061_SUBMIT")} >
+                            <Button
+                                onClick={() => {
+                                    done("EVENT061_SUBMIT");
+                                    nextStep();
+                                }
+                                }
+                            >
                                 YES
                             </Button>
                         </div>
                     }
+
+
+
+                        </Timeline.Item>
+
+
+
+
+
+
+                        <Timeline.Item
+                            title="Application submitted"
+                            bullet={<IconBusinessplan />}
+                        >
 
 {
                         state.matches("state080_success") &&
@@ -377,6 +501,13 @@ const MultiStepFormMachineComponentStatsCard = () => {
                             </p>
                         </div>
                     }
+                        </Timeline.Item>
+                    </Timeline>
+
+
+
+
+
 
 
 
