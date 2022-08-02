@@ -180,9 +180,69 @@ const multiStepFormMachine =
 
 
 
-import { ThemeIcon, Badge, Paper, Container, Button, Title, Timeline } from '@mantine/core';
-import { IconRocketOff, IconRocket, IconUser, IconCalendar, IconSend, IconBusinessplan, IconReport } from '@tabler/icons';
+import { ThemeIcon, Badge, Paper, Container, Button, Title, Timeline, Tabs, Blockquote, Alert } from '@mantine/core';
+import { IconRocketOff, IconRocket, IconUser, IconCalendar, IconSend, IconBusinessplan, IconAlertCircle } from '@tabler/icons';
 import { done, error } from 'xstate/lib/actions';
+import { Card, UnstyledButton, Anchor } from '@mantine/core';
+import {
+    IconCreditCard,
+    IconBuildingBank,
+    IconRepeat,
+    IconReceiptRefund,
+    IconReceipt,
+    IconReceiptTax,
+    IconReport,
+    IconCashBanknote,
+    IconCoin,
+} from '@tabler/icons';
+
+const mockdata = [
+    {
+        title: 'Credit cards',
+        icon: IconCreditCard,
+        color: 'violet'
+    },
+    {
+        title: 'Banks nearby',
+        icon: IconBuildingBank,
+        color: 'indigo'
+    },
+    {
+        title: 'Transfers',
+        icon: IconRepeat,
+        color: 'blue'
+    },
+    {
+        title: 'Refunds',
+        icon: IconReceiptRefund,
+        color: 'green'
+    },
+    {
+        title: 'Receipts',
+        icon: IconReceipt,
+        color: 'teal'
+    },
+    {
+        title: 'Taxes',
+        icon: IconReceiptTax,
+        color: 'cyan'
+    },
+    {
+        title: 'Reports',
+        icon: IconReport,
+        color: 'pink'
+    },
+    {
+        title: 'Payments',
+        icon: IconCoin,
+        color: 'red'
+    },
+    {
+        title: 'Cashback',
+        icon: IconCashBanknote,
+        color: 'orange'
+    },
+];
 
 const ICON_SIZE = 60;
 
@@ -204,6 +264,51 @@ const useStyles = createStyles((theme) => ({
         fontFamily: `Greycliff CF, ${theme.fontFamily}`,
         lineHeight: 1,
     },
+
+    item: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        borderRadius: theme.radius.md,
+        height: 90,
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+        transition: 'box-shadow 150ms ease, transform 100ms ease',
+
+        '&:hover': {
+            boxShadow: `${theme.shadows.md} !important`,
+            transform: 'scale(1.05)',
+        },
+    },
+
+    card3rd: {
+        height: 440,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+    },
+
+    title3rd: {
+        fontFamily: `Greycliff CF ${theme.fontFamily}`,
+        fontWeight: 900,
+        color: theme.white,
+        lineHeight: 1.2,
+        fontSize: 32,
+        marginTop: theme.spacing.xs,
+    },
+
+    category3rd: {
+        color: theme.white,
+        opacity: 0.7,
+        fontWeight: 700,
+        textTransform: 'uppercase',
+    },
+
+
 }));
 
 
@@ -217,20 +322,36 @@ import { IconPhoneCall, IconAt } from '@tabler/icons';
 
 import { DateRangePicker, DateRangePickerValue } from '@mantine/dates';
 
-
-
+import { SimpleGrid } from '@mantine/core';
 
 
 const MultiStepFormMachineComponentStatsCard = () => {
     const [state, send] = useMachine(multiStepFormMachine);
 
-    const { classes } = useStyles();
+    const { classes, theme } = useStyles();
 
     const [timelineState, setActive] = useState(0);
 
     // const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
     // const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
+    const items = mockdata.map((item) => (
+        <UnstyledButton
+            key={item.title}
+            className={classes.item}
+        >
+            <item.icon
+                color={theme.colors[item.color][6]}
+                size={32}
+            />
+            <Text
+                size="xs"
+                mt={7}
+            >
+                {item.title}
+            </Text>
+        </UnstyledButton>
+    ));
 
 
     const nextStep = () => setActive((current) => current + 1);
@@ -450,26 +571,31 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                         onChange={setBlastOffDate}
                                     />
 
-
-                                    <Button
-                                        onClick={() => {
-                                            send("EVENT031_BACK");
-                                            prevStep();
-                                        }
-                                        }
+                                    <Group
+                                        position='apart'
+                                        m="lg"
                                     >
-                                        Back
-                                    </Button>
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => {
+                                                send("EVENT031_BACK");
+                                                prevStep();
+                                            }
+                                            }
+                                        >
+                                            Back
+                                        </Button>
 
-                                    <Button
-                                        onClick={() => {
-                                            send("EVENT032_CONFIRM_DATE");
-                                            nextStep();
-                                        }
-                                        }
-                                    >
-                                        Confirm temporal anomaly
-                                    </Button>
+                                        <Button
+                                            onClick={() => {
+                                                send("EVENT032_CONFIRM_DATE");
+                                                nextStep();
+                                            }
+                                            }
+                                        >
+                                            Confirm temporal anomaly
+                                        </Button>
+                                    </Group>
                                 </div>
                             }
 
@@ -491,25 +617,134 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                 state.matches("state040_confirming_with_3rd_party.state050_confirming_idle") &&
                                 <div>
 
-                                    <Button
-                                        onClick={() => {
-                                            send("EVENT051_BACK");
-                                            prevStep();
-                                        }
-                                        }
+                                    <Tabs
+                                        defaultValue="first"
+                                        m="lg"
                                     >
-                                        NO
-                                    </Button>
+                                        <Tabs.List
+                                            grow
+                                            position="apart"
+                                        >
+                                            <Tabs.Tab value="first">Company info</Tabs.Tab>
+                                            <Tabs.Tab value="second">Motto</Tabs.Tab>
+                                            <Tabs.Tab value="third">Services</Tabs.Tab>
+                                        </Tabs.List>
 
-                                    <Button
-                                        onClick={() => {
-                                            send("EVENT051_CONFIRM_ALL");
-                                            nextStep();
-                                        }
-                                        }
+                                        <Tabs.Panel
+                                            value="first"
+                                            pt="xs"
+                                        >
+
+
+                                            <Paper
+                                                shadow="md"
+                                                p="xl"
+                                                radius="md"
+                                                sx={{ backgroundImage: `url(https://source.unsplash.com/random/?technology,code)` }}
+                                                className={classes.card3rd}
+                                            >
+                                                <div>
+                                                    <Text
+                                                        className={classes.category3rd}
+                                                        size="xs"
+                                                    >
+                                                        TOTALLY NOT EVIL MEGA CORPORATION
+                                                    </Text>
+                                                    <Title
+                                                        order={3}
+                                                        className={classes.title3rd}
+                                                    >
+                                                        This is not the best organisation in the world
+                                                    </Title>
+                                                </div>
+                                                <Button
+                                                    variant="white"
+                                                    color="dark"
+                                                >
+                                                    Read just the tribute
+                                                </Button>
+                                            </Paper>
+
+
+
+                                        </Tabs.Panel>
+
+                                        <Tabs.Panel
+                                            value="second"
+                                            pt="xs"
+                                        >
+                                            <Blockquote
+                                                color="cyan"
+                                                cite="– J.F. Queso"
+                                            >
+                                                We choose to go to the moon, not because it is cheesy...
+                                            </Blockquote>
+                                        </Tabs.Panel>
+
+                                        <Tabs.Panel
+                                            value="third"
+                                            pt="xs"
+                                        >
+                                            <Card
+                                                withBorder
+                                                radius="md"
+                                                className={classes.card}
+                                            >
+                                                <Group position="apart">
+                                                    <Text className={classes.title}>Services</Text>
+                                                    <Anchor
+                                                        size="xs"
+                                                        color="dimmed"
+                                                        sx={{ lineHeight: 1 }}
+                                                    >
+                                                        + 21 other services
+                                                    </Anchor>
+                                                </Group>
+                                                <SimpleGrid
+                                                    cols={3}
+                                                    mt="md"
+                                                >
+                                                    {items}
+                                                </SimpleGrid>
+                                            </Card>
+                                        </Tabs.Panel>
+
+                                    </Tabs>
+
+
+                                    <Alert icon={<IconAlertCircle size={16} />} title="Next step" color="cyan" radius="md" variant="outline">
+                                        Have they managed to get back to you by the date (insert from above) in order for us to get Spacely Sprockets off our planet?
+                                    </Alert>
+
+                                    <Group
+                                        position='apart'
+                                        m="lg"
                                     >
-                                        YES
-                                    </Button>
+
+                                        <Button
+                                            color="orange"
+                                            onClick={() => {
+                                                send("EVENT051_BACK");
+                                                prevStep();
+                                            }
+                                            }
+                                        >
+                                            NO
+                                        </Button>
+
+                                        <Button
+                                            color="green"
+                                            onClick={() => {
+                                                send("EVENT051_CONFIRM_ALL");
+                                                nextStep();
+                                            }
+                                            }
+                                        >
+                                            YES
+                                        </Button>
+
+                                    </Group>
+
                                 </div>
                             }
 
@@ -536,25 +771,31 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
                                     </p>
 
-                                    <Button
-                                        onClick={() => {
-                                            error("EVENT051_BACK");
-                                            prevStep();
-                                        }
-                                        }
+                                    <Group
+                                        position='apart'
+                                        m="lg"
                                     >
-                                        NO
-                                    </Button>
+                                        <Button
+                                            onClick={() => {
+                                                error("EVENT051_BACK");
+                                                prevStep();
+                                            }
+                                            }
+                                        >
+                                            NO
+                                        </Button>
 
-                                    <Button
-                                        onClick={() => {
-                                            done("EVENT061_SUBMIT");
-                                            nextStep();
-                                        }
-                                        }
-                                    >
-                                        YES
-                                    </Button>
+                                        <Button
+                                            onClick={() => {
+                                                done("EVENT061_SUBMIT");
+                                                nextStep();
+                                            }
+                                            }
+                                        >
+                                            YES
+                                        </Button>
+
+                                    </Group>
                                 </div>
                             }
 
