@@ -34,7 +34,7 @@ export type MultiStepFormMachineEvent =
     };
 
 const multiStepFormMachine =
-    /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMVgAwEYsH0AnAewGMBrMTMQgMWMIFsA6VDbAJgLADtNCAljygAlMpWqEAxAFEAajIByAFSwcc+AMIB5RbQCSIgLL4R2zQGkZymTJGJQAB2KwBKAcR4OQAD0QBaAGYAVgB2ZjCADkDA0MCOADYEmMCAGhAATwDAyPCcUIBOHGDI4MCCyNycAF9q9LZMXAISCiowGnomVnRGwO4+GiEoABF2KTAAN14ULECNACEAQUtvZ1d3T28-BCCcZlDKnKwCgo4C4ISCgBZg9KydwIS9k9COdQPSnDPg2vqe7DwRHEbQ6DBYDWwfXw00GwlGmFkChUsw4Wl0BmM+GGixsqxcbg8XiQvmyXGYOCubwKuCuCWCWCwCTuARwOEC5NCOASoR5VyuPIK5V+IAhTSBrUknXB-ywVwIpE8ADMBEwht12Fh6fgFTxlarhPgBBAADZgRFKVTBDQ6PSGEyLAAyDrx60JW2ybOYfQ4oRKwWpkUFyWZCB9e2CJQpBVCdIKl0CwtFgJaEnadDB6sacu1SpVjDVoq1Or1+YNRtN5uRVvwSxWxLWBM2xO2BX2V0DkQ4YXbEeOOBD-j5zEqgqqWEDSQqCUTMuTwMlGdF2eLeYLMoS8tz+qg+FgAFcAEb5lDuYRSCCeMDMIQTYiUTMA5rztNSh+yze61fCN8bnOf7e7oex6nlACA3mQGCEgA2lgAC6LqNkSoDbLswTDpE44JHywR8hutyZIgVpYMwtKMlyszRhwM4anOEovouMrLlupZQD+H4lkMgFHm4IHjIQJCEMwjjGhgioMTRT50aCXRLuxX6saKv4rgB+7cSeQxgTwt6kJBngwfB9b4hsSEkjsZRetGsz+hcnYvCG8R7JcCQcBhVwVJUfLUY0tGptJ0oakx-4seel4Pm+PkgumMmMXJ24IcZ7o7F2HDMIKgRXDE2FFE8IYYcRJQBl8uAcO2BS1HUIA8MQEBwN4SaSb5UX+Y0XDQgMgjCGIUmEPFbrNtkbnMD6YRxnG8TxEkA70mhFz+lynJqJU04VfV4qNa+opQjCHUjOwvVNsh2SyswdLvFyCS5IykRXAOHDxMOEavIktLfJ2XmPmtkUbTFf4cd+haxSxhommA+0mShIStqd83XfScYxiGeBoTg2WUpqxSXDy71iimX3iVmgNrhqSnMZxqnAUMYOJUEjxehcMbqGjPo3QRCCxAkw4vE8IQuay1zYxFC7RQFhP-TKoSizuCqMMJbRU-1DwYeSFwZc5ZyJAUIZYcRkT5MNY2apUAsNXjwsE798ny4dOxylcytYY8VIa-Z7JvC51zHLruslMbn1C812AYYBpCkHA8CGa6B2mUEsxDaEGUxFyzPFCGpxoZSZzJGosQhMtfwSX79FMFb0eUpE9uq07lxTTyETpUktLJNyF3ldUQA */
+    /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMVgAwEYsH0AnAewGMBrMTMQgMWMIFsA6VDbAJgLADtNCAljygAlMpWqEAxAFEAajIByAFSwcc+AMIB5RbQCSIgLL4R2zQGkZymTJGJQAB2KwBKAcR4OQAD0QBaAGYAVgB2ZjCADkDA0MCOADYEmMCAGhAATwDAyPCcUIBOHGDI4MCCyNycAF9q9LZMXAISCiowGnomVnRGwO4+GiEoABF2KTAAN14ULECNACEAQUtvZ1d3T28-BCCcZlDKnKwCgo4C4ISCgBZg9KydwIS9k9COdQPSnDPg2vqe7DwRHEbQ6DBYDWwfXw00GwlGmFkChUsw4Wl0BmM+GGixsqxcbg8XiQvmyXGYOCubwKuCuCWCWCwCTuARwOEC5NCOASoR5VyuPIK5V+IAhTSBrUknXB-ywVwIpE8ADMBEwhvgAO5uAAW+EChAg+EcaEIKAy3XYWHp+AVPGVquE+AEEAANmBEUpVMENDo9IYTIsADIBvHrQlbbJs5h9DihJ6vS2M-LMhAx8KVBJqSLqMr0jjC0WAloSdp0MHmxpy61KlWMNWalA6vUGo0ms2iq02u21h1O13u5Fe-BLFbEtYEzbE7YFfZXSIVDhhWfBelFZP+PnMSqCqpYOdJCoJfMywvAyVl0WVzs1uva3X6w3G03l7AZqu268O2AAVwARrWUO4whSBAnhgMwQgTMQlDPmKRYgqWXQXvK1b2lAGq3k2D6tjBr5Xqh+Dfn+biAVACAQWQGCEgA2lgAC6IbjkSoDbLswSbpExzFLuCRXPEaSZIgGZseU5QXFcB6RF8R4WieEollKMGXih3ZofWjb3i2T6irhylqoR-4keMhAkIQzCOM6GCKuex7NKe8nWRaSnvvhal3s2j5tjKOnOSpBG-gZQxkTwkGkJRng0fRo74hsTEkjswRXMwBQHC85TUgk0Sxsm8SJU83JJJUWCvAu0mNLJxagohMpOV2N4Nm5WGmsBoHPjB5XwQpSFvrVDquZhmn3E40VhpOAQLmxajFOUPLlAuoTJnOWDMHSs4ZXgHCScktR1CAPDEBAcDeAWtlyZV0oWlw0IDIIwhiKdhAMTF4YPOJzAxmEBSXMkHDxEka70mxFzBEU3LrempUAidFUIedvT9PwQzwmAj0jcx2SystwTvFyGWhIykRXGuP0cJuy7FTxCTfFmEOwXZZ2KchPl1ep7nYe2jM9WhvbI1FoYTmjDzA5j6jcgTK75cmeBsTgIOUpaxSXDyNPtWeVWORzH6qRhGkeThGv4fpxFDCj-NxUEjxRhcsaMj9oR8kyAkILxJNymTxQEyE4mHjtx3itDnXVfrvl9TrbMynj3Wa1WjDmW0JuxSxRzkmJkQZU8HByqEtyO3E7J9Fyzv26tytQx1DkVkHzMNQN8fPeuGMK6tqdfJn2f3DEb1vHO0QxLujw-D7Nl+2XauNBxfmkKQcDwLzjF130wmU7xIOzJT3KS7gJPLn0uAHCJ3t-DJpeq4wtejTslKRMnPGp83GdFW3ARhOEZT8u8sphCU23VEAA */
     createMachine<
         MultiStepFormMachineContext,
         MultiStepFormMachineEvent
@@ -63,11 +63,11 @@ const multiStepFormMachine =
         EVENT032_CONFIRM_DATE: {
           actions: "assignDateToContext",
           description: "Confirm date is correct",
-          target: "state040_confirming",
+          target: "state040_confirming_with_3rd_party",
         },
       },
     },
-    state040_confirming: {
+    state040_confirming_with_3rd_party: {
       initial: "state050_confirming_idle",
       states: {
         state050_confirming_idle: {
@@ -75,7 +75,8 @@ const multiStepFormMachine =
           description: "At the confirmation stage, awaiting 3rd party sign-off",
           on: {
             EVENT051_CONFIRM_ALL: {
-              description: "Verify that everything is good",
+              description:
+                "Verify that everything is good on both ours and 3rd party side",
               target: "state060_confirming_submitting",
             },
             EVENT051_BACK: {
@@ -86,6 +87,7 @@ const multiStepFormMachine =
           },
         },
         state060_confirming_submitting: {
+          description: "Awaiting to submit application",
           invoke: {
             src: "EVENT061_SUBMIT",
             onDone: [
@@ -97,6 +99,8 @@ const multiStepFormMachine =
             onError: [
               {
                 actions: "assignErrorMessageToContext",
+                description:
+                  "Something wrong with the submission - go back a step",
                 target: "state050_confirming_idle",
               },
             ],
@@ -114,7 +118,7 @@ const multiStepFormMachine =
       },
     },
     state080_success: {
-      description: "All done, ship it and grab a beer",
+      description: "All done, ship it and sip it",
       type: "final",
     },
   },
