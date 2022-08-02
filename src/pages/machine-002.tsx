@@ -181,8 +181,8 @@ const multiStepFormMachine =
 
 
 import { ThemeIcon, Badge, Paper, Container, Button, Title, Timeline, Tabs, Blockquote, Alert } from '@mantine/core';
-import { IconRocketOff, IconRocket, IconUser, IconCalendar, IconSend, IconBusinessplan, IconAlertCircle } from '@tabler/icons';
-import { done, error } from 'xstate/lib/actions';
+import { IconRocketOff, IconRocket, IconUser, IconCalendar, IconSend, IconBusinessplan, IconAlertCircle, IconCheck } from '@tabler/icons';
+import { done, doneInvoke, error } from 'xstate/lib/actions';
 import { Card, UnstyledButton, Anchor } from '@mantine/core';
 import {
     IconCreditCard,
@@ -323,6 +323,7 @@ import { IconPhoneCall, IconAt } from '@tabler/icons';
 import { DateRangePicker, DateRangePickerValue } from '@mantine/dates';
 
 import { SimpleGrid } from '@mantine/core';
+import { doneState, errorPlatform } from 'xstate/lib/actionTypes';
 
 
 const MultiStepFormMachineComponentStatsCard = () => {
@@ -712,7 +713,13 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                     </Tabs>
 
 
-                                    <Alert icon={<IconAlertCircle size={16} />} title="Next step" color="cyan" radius="md" variant="outline">
+                                    <Alert
+                                        icon={<IconAlertCircle size={16} />}
+                                        title="Next step"
+                                        color="cyan"
+                                        radius="md"
+                                        variant="outline"
+                                    >
                                         Have they managed to get back to you by the date (insert from above) in order for us to get Spacely Sprockets off our planet?
                                     </Alert>
 
@@ -777,7 +784,7 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                     >
                                         <Button
                                             onClick={() => {
-                                                error("EVENT051_BACK");
+                                                send ("EVENT061_SUBMIT");
                                                 prevStep();
                                             }
                                             }
@@ -787,7 +794,7 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
                                         <Button
                                             onClick={() => {
-                                                done("EVENT061_SUBMIT");
+                                                send ("EVENT061_SUBMIT");
                                                 nextStep();
                                             }
                                             }
@@ -816,11 +823,18 @@ const MultiStepFormMachineComponentStatsCard = () => {
                             {
                                 state.matches("state080_success") &&
                                 <div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
-                                    </p>
-                                </div>
-                            }
+
+                                    <Alert
+                                        icon={<IconCheck size={28} />}
+                                        title="Success"
+                                        color="green"
+                                        radius="md"
+                                        variant="outline"
+                                    >
+                                        Now hurry up and wait
+                                    </Alert>
+
+                                </div>}
                         </Timeline.Item>
                     </Timeline>
 
@@ -836,7 +850,6 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
             </Container>
 
-
             <iframe
                 src="https://stately.ai/viz/embed/e7109c2c-7048-4d67-85c2-02ad402bf1a6?mode=viz&panel=code&showOriginalLink=1&readOnly=1&pan=1&zoom=2&controls=1"
                 sandbox="allow-same-origin allow-scripts"
@@ -847,12 +860,6 @@ const MultiStepFormMachineComponentStatsCard = () => {
                 style={{ marginTop: 20 }}
 
             ></iframe>
-
-
-            <img
-                src={'https://stately.ai/registry/machines/e7109c2c-7048-4d67-85c2-02ad402bf1a6.png'}
-                alt={'asdf'}
-            />
 
         </Container>
     );
