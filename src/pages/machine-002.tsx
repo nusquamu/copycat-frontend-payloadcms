@@ -34,73 +34,87 @@ export type MultiStepFormMachineEvent =
     };
 
 const multiStepFormMachine =
-    /** @xstate-layout N4IgpgJg5mDOIC5QFsCuAbALgSwMqbAAcAxAewCdkA6MAOwPO1qgAUBDATzDAGIBhAPIA5YgEkASgFkA+iwCCATQCiSxKEKlY2HKVpqQAD0QBaACwBGAGxUAHAFYAzDYCcAdkseATOec3TAGhAOEwsABipzULto01DQyzsbBwSAXxTAtCw8AhIKajoGJigAETYCHgAhOT4AaX0NLR09JEMTO3MHKkTQhztTSxtPUwtzQOCEY09LZypQ1084vvM7b1NnNIyMHHwiMkoaejBGZlLywREJGWK5ABVVFobtbF19IwnY8Ncbc2H2509Eq47GMTOZ5lQHA5zJ4FqFoe5-hsQJltjk9tQAMa6ABm2EoRSo2Ag6F45zEUnqmieLxab2Mdlc5i6vm+jmcdiiyxBCB+nWc5h+nnmiUsplcDlMSJR2V2eSoWNouPxzEJxN4VVqlMaz2aoDpy06A0h8wczjhQw63OMy08tjWAxsCWcphsSRsUq2Mty+wVSuQBNgqAARv7MDhmDwILowITaAA3UgAaxj0p23sxOLx-pVgZD2nDUAQTATGLKOoA2qEALpa6m61rvOZdOJgxIuSzzZyWbm9cLfAWms12DvDD1ZNPo+WZ5VQKi50MFnhHcgUKiEdBlbFy1NouW+rMB4MLopF+OkUtNSs1h5UpqvUE+CExBLLNm9YFBRACuy2DnOhw9CsiR9GOqKyj607ZlAkbRnOmBlCmnoTnukFFLWd60g+TKmJ4ErRPyPS9EC3IuuE5rQssrhAu07pIrQpAQHA+g7uB+SHMcrCcNw6E6veExOOEyyiokniutErjOFaf5UAkYqhGJ3xOJYDigV6k4FEcRSnGAPE0nqJgOECVBDDYVHxP8UTTFaQo-vJUQAkKyymMaqnIRBioHiqRIkrp9Z0jhNjGZYcI+PaQyeNyomzGKpnzD8awLOYrm7u5fqHnmYZoTe2p6Q2ZhCrMromRYgzQhK3I+Lawx+E4FhmuYSSuMlrFTh5M5Tsg65gAQvl8daEq2ACzkJOaEoeD27izEKzh4QCDV+E16TIkhKUZm1UG9ZhEx2OyzKuga7Kch+4xmHyCymRyySGV8jrNemc6oBiGJwPA2V1n1hk-uKrqmspDL-Ek3LtF9AxuNMZqWA1kpLSx6abfpEyQzMO37WyHLA1J3wybh-QCqEZryXYaRpEAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMVgAwEYsH0AnAewGMBrMTMQgMWMIFsA6VDbAJgLADtNCAljygAlMpWqEAxAFEAajIByAFSwcc+AMIB5RbQCSIgLL4R2zQGkZymTJGJQAB2KwBKAcR4OQAD0QBaAGYAVgB2ZjCADkDA0MCOADYEmMCAGhAATwDAyPCcUIBOHGDI4MCCyNycAF9q9LZMXAISCiowGnomVnRGwO4+GiEoABF2KTAAN14ULECNACEAQUtvZ1d3T28-BCCcZlDKnKwCgo4C4ISCgBZg9KydwIS9k9COdQPSnDPg2vqe7DwRHEbQ6DBYDWwfXw00GwlGmFkChUsw4Wl0BmM+GGixsqxcbg8XiQvmyXGYOCubwKuCuCWCWCwCTuARwOEC5NCOASoR5VyuPIK5V+IAhTSBrUknXB-ywVwIpE8ADMBEwht12Fh6fgFTxlarhPgBBAADZgRFKVTBDQ6PSGEyLAAyDrx60JW2ybOYfQ4oRKwWpkUFyWZCB9e2CJQpBVCdIKl0CwtFgJaEnadDB6sacu1SpVjDVoq1Or1+YNRtN5uRVvwSxWxLWBM2xO2BX2V0DkQ4YXbEeOOBD-j5zEqgqqWEDSQqCUTMuTwMlGdF2eLeYLMoS8tz+qg+FgAFcAEb5lDuYRSCCeMDMIQTYiUTMA5rztNSh+yze61fCN8bnOf7e7oex6nlACA3mQGCEgA2lgAC6LqNkSoDbLswTDpE44JHywR8hutyZIgVpYMwtKMlyszRhwM4anOEovouMrLlupZQD+H4lkMgFHm4IHjIQJCEMwjjGhgioMTRT50aCXRLuxX6saKv4rgB+7cSeQxgTwt6kJBngwfB9b4hsSEkjsZRetGsz+hcnYvCG8R7JcCQcBhVwVJUfLUY0tGptJ0oakx-4seel4Pm+PkgumMmMXJ24IcZ7o7F2HDMIKgRXDE2FFE8IYYcRJQBl8uAcO2BS1HUIA8MQEBwN4SaSb5UX+Y0XDQgMgjCGIUmEPFbrNtkbnMD6YRxnG8TxEkA70mhFz+lynJqJU04VfV4qNa+opQjCHUjOwvVNsh2SyswdLvFyCS5IykRXAOHDxMOEavIktLfJ2XmPmtkUbTFf4cd+haxSxhommA+0mShIStqd83XfScYxiGeBoTg2WUpqxSXDy71iimX3iVmgNrhqSnMZxqnAUMYOJUEjxehcMbqGjPo3QRCCxAkw4vE8IQuay1zYxFC7RQFhP-TKoSizuCqMMJbRU-1DwYeSFwZc5ZyJAUIZYcRkT5MNY2apUAsNXjwsE798ny4dOxylcytYY8VIa-Z7JvC51zHLruslMbn1C812AYYBpCkHA8CGa6B2mUEsxDaEGUxFyzPFCGpxoZSZzJGosQhMtfwSX79FMFb0eUpE9uq07lxTTyETpUktLJNyF3ldUQA */
     createMachine<
         MultiStepFormMachineContext,
         MultiStepFormMachineEvent
     >(
         {
-  id: "multiStepForm",
-  initial: "enteringPayee",
+  id: "state010_rocketeerForm",
+  initial: "state020_enteringRocketeer",
   states: {
-    enteringPayee: {
+    state020_enteringRocketeer: {
+      description: "Enter relevent information about applicant",
       on: {
-        CONFIRM_PAYEE: {
-          actions: "assignPayeeInfoToContext",
-          target: "enteringDate",
+        EVENT021_CONFIRM_ROCKETEER: {
+          actions: "action001_assignRocketeerInfoToContext",
+          description: "Confirm applicant's details are correct",
+          target: "state030_enteringDate",
         },
       },
     },
-    enteringDate: {
+    state030_enteringDate: {
+      description: "Select date of launch",
       on: {
-        BACK: {
-          target: "enteringPayee",
+        event031_BACK: {
+          description: "Go back to applicant details, something incorrect",
+          target: "state020_enteringRocketeer",
         },
-        CONFIRM_DATE: {
+        EVENT032_CONFIRM_DATE: {
           actions: "assignDateToContext",
-          target: "confirming",
+          description: "Confirm date is correct",
+          target: "state040_confirming",
         },
       },
     },
-    confirming: {
-      initial: "idle",
+    state040_confirming: {
+      initial: "state050_confirming_idle",
       states: {
-        idle: {
+        state050_confirming_idle: {
           exit: "clearErrorMessage",
+          description: "At the confirmation stage, awaiting 3rd party sign-off",
           on: {
-            CONFIRM: {
-              target: "submitting",
+            EVENT051_CONFIRM_ALL: {
+              description: "Verify that everything is good",
+              target: "state060_confirming_submitting",
             },
-            BACK: {
-              target: "#multiStepForm.enteringDate",
+            EVENT051_BACK: {
+              description:
+                "Return from `idle` in `confirming`, perhaps 3rd party rejected or didn't get back in time",
+              target: "#state010_rocketeerForm.state030_enteringDate",
             },
           },
         },
-        submitting: {
+        state060_confirming_submitting: {
           invoke: {
-            src: "submitPayment",
+            src: "EVENT061_SUBMIT",
             onDone: [
               {
-                target: "complete",
+                description: "Confirm complete and submit application",
+                target: "state070_confirming_complete",
               },
             ],
             onError: [
               {
                 actions: "assignErrorMessageToContext",
-                target: "idle",
+                target: "state050_confirming_idle",
               },
             ],
           },
         },
-        complete: {
+        state070_confirming_complete: {
+          description:
+            "Confirming everything is sorted (might need external sign-off)",
           type: "final",
         },
       },
       onDone: {
-        target: "success",
+        description: "Application complete",
+        target: "state080_success",
       },
     },
-    success: {
+    state080_success: {
+      description: "All done, ship it and grab a beer",
       type: "final",
     },
   },
