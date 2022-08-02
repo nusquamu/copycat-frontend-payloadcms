@@ -2,12 +2,12 @@ import { assign, createMachine } from 'xstate';
 import { useMachine } from '@xstate/react';
 
 export interface MultiStepFormMachineContext {
-    payeeInfo?: PayeeInfo;
+    rocketeerInfo?: RocketeerInfo;
     dateInfo?: DateInfo;
     errorMessage?: string;
 }
 
-interface PayeeInfo {
+interface RocketeerInfo {
     name: string;
     amount: number;
     currency: string;
@@ -19,123 +19,128 @@ interface DateInfo {
 
 export type MultiStepFormMachineEvent =
     | {
-        type: 'BACK';
+        type: 'EVENT031_BACK';
     }
     | {
-        type: 'CONFIRM_PAYEE';
-        info: PayeeInfo;
+        type: 'EVENT021_CONFIRM_ROCKETEER';
+        info: RocketeerInfo;
     }
     | {
-        type: 'CONFIRM_DATE';
+        type: 'EVENT032_CONFIRM_DATE';
         info: DateInfo;
     }
     | {
-        type: 'CONFIRM';
-    };
+        type: 'EVENT051_CONFIRM_ALL';
+    }
+    | {
+        type: 'EVENT051_BACK';
+    }
 
 const multiStepFormMachine =
-    /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMVgAwEYsH0AnAewGMBrMTMQgMWMIFsA6VDbAJgLADtNCAljygAlMpWqEAxAFEAajIByAFSwcc+AMIB5RbQCSIgLL4R2zQGkZymTJGJQAB2KwBKAcR4OQAD0QBaAGYAVgB2ZjCADkDA0MCOADYEmMCAGhAATwDAyPCcUIBOHGDI4MCCyNycAF9q9LZMXAISCiowGnomVnRGwO4+GiEoABF2KTAAN14ULECNACEAQUtvZ1d3T28-BCCcZlDKnKwCgo4C4ISCgBZg9KydwIS9k9COdQPSnDPg2vqe7DwRHEbQ6DBYDWwfXw00GwlGmFkChUsw4Wl0BmM+GGixsqxcbg8XiQvmyXGYOCubwKuCuCWCWCwCTuARwOEC5NCOASoR5VyuPIK5V+IAhTSBrUknXB-ywVwIpE8ADMBEwhvgAO5uAAW+EChAg+EcaEIKAy3XYWHp+AVPGVquE+AEEAANmBEUpVMENDo9IYTIsADIBvHrQlbbJs5h9DihJ6vS2M-LMhAx8KVBJqSLqMr0jjC0WAloSdp0MHmxpy61KlWMNWalA6vUGo0ms2iq02u21h1O13u5Fe-BLFbEtYEzbE7YFfZXSIVDhhWfBelFZP+PnMSqCqpYOdJCoJfMywvAyVl0WVzs1uva3X6w3G03l7AZqu268O2AAVwARrWUO4whSBAnhgMwQgTMQlDPmKRYgqWXQXvK1b2lAGq3k2D6tjBr5Xqh+Dfn+biAVACAQWQGCEgA2lgAC6IbjkSoDbLswSbpExzFLuCRXPEaSZIgGZseU5QXFcB6RF8R4WieEollKMGXih3ZofWjb3i2T6irhylqoR-4keMhAkIQzCOM6GCKuex7NKe8nWRaSnvvhal3s2j5tjKOnOSpBG-gZQxkTwkGkJRng0fRo74hsTEkjswRXMwBQHC85TUgk0Sxsm8SJU83JJJUWCvAu0mNLJxagohMpOV2N4Nm5WGmsBoHPjB5XwQpSFvrVDquZhmn3E40VhpOAQLmxajFOUPLlAuoTJnOWDMHSs4ZXgHCScktR1CAPDEBAcDeAWtlyZV0oWlw0IDIIwhiKdhAMTF4YPOJzAxmEBSXMkHDxEka70mxFzBEU3LrempUAidFUIedvT9PwQzwmAj0jcx2SystwTvFyGWhIykRXGuP0cJuy7FTxCTfFmEOwXZZ2KchPl1ep7nYe2jM9WhvbI1FoYTmjDzA5j6jcgTK75cmeBsTgIOUpaxSXDyNPtWeVWORzH6qRhGkeThGv4fpxFDCj-NxUEjxRhcsaMj9oR8kyAkILxJNymTxQEyE4mHjtx3itDnXVfrvl9TrbMynj3Wa1WjDmW0JuxSxRzkmJkQZU8HByqEtyO3E7J9Fyzv26tytQx1DkVkHzMNQN8fPeuGMK6tqdfJn2f3DEb1vHO0QxLujw-D7Nl+2XauNBxfmkKQcDwLzjF130wmU7xIOzJT3KS7gJPLn0uAHCJ3t-DJpeq4wtejTslKRMnPGp83GdFW3ARhOEZT8u8sphCU23VEAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMVgAwEYsH0AnAewGMBrMTMQgMWMIFsA6VDbAJgLADtNCAljygAlMpWqEAxAFEAajIByAFSwcc+AMIB5RbQCSIgLL4R2zQGkZymTJGJQAB2KwBKAcR4OQAD0QBaAGYAVgB2ZjCADkDA0MCOADYEmMCAGhAATwDAyPCcUIBOHGDI4MCCyNycAF9q9LZMXAISCiowGnomVnRGwO4+GiEoABF2WQUVLECNACEAQUtvZ1d3T28-BH8cDmZ4jjisABZgw4TEnAv0rM2QncTD3KwEo4Sijlr6nuw8InE2joYLAa2D6+F4-CGo0w4yUqniWl0BmM+GGcxsSxcbg8XiQvmyXGYOEOHA4BVwp2CWCeVwCF0ChNCOASoRZh0OLIK5Q+IGBTV+rUknSBXyOBFIngAZgImEN8AB3NwAC3wgUIEHwjjQhBQGW67CwlPw4p4UplwnwAggABswDDJsENDo9IYTHMADJujErbHrbI4el9fYJfJcSnB0I0hD7cKVZ4cSLqMqU951Hkin4tCTtOiAvWNQ5iyXSxiyhUoZWq9Wa7W63mG42mkvmy02u2qB34eaLXHLLFrXEbArMUIPCocMIPYKUoqR-xs5iVTlVLCRApJCoJbm8jN-QW53kFo1Fs1QeVKlVqjVanV57DPI8m4uy2AAVwARiWUO5hFIIJ4wMwQgAG7EJQt58pm-w5l0B6Fo+J5nuWF5VtetYiveDZPuar4fm435QAgwFkBg2IANpYAAul6fY4qAGxBMUC6RFgRSUpECSHPEaSZIgzzBLsnIFMEHEbpE2xbumzS7tmQrgYemEIWWFaXtWN68hhx5NqeOGfvhUg0CQhDMI4VoYBK+6SfyWYAjBIryZppbnpWV41uBGnwVp+A6XhQyETwIGkCRnjkVRPaYqstF4psJzMAUoSrnF5Rkgk0ShAkkbxIczDBsySSVFgoQksEEn6juAoyRZ+r2R5jlIc5qkZL+-63uBZXWdBwpVXBja1cpKE1tREW+ps478WoxTlCy5TjhGPEIKuWDZSc7FiWoYnJLUqY8MQEBwN425SeVNmdY0XBggMgjCGIR2EINPoDtkhxDvsYRrmuXGJOlc3+JS-HCcERTMng8bsSVjRtVBsm8qC4KDMIUJgHd-Z0dkRxLeojJ5aETyRIcs4cPEC5ToV9xnEJCZg98h3tVDdndVhp5KchLlqSK9YOc21qI2F3rI1FQQA+jTLxccLG5ZGeD8TggPEgaxSvCylMQdJx1yfTilOSpqFuernneV+QxI5F9ExAkuzCWlTwEyOpyRpxOwFsTxS4yET2bqmB1WZDlX5rrvXMw14HYw+PXmuKjAmW0RvDUEzGEsJDwpcGHAFqEwSRnEAa4BxmWnInSsQ3utldSHDOIX1LPXE44X3SjmwFll8uJ+x2yp+nc0xMwJKkuS0YjmJBfU97xeNMxXkvqQpBwPAPM0THfT8YEZycYDUxnMyEu4DsU59Lg8XlEvg9e0XjDRw99fxvHHErcnbezmE4RlKcrwFOyYkE5t1RAA */
     createMachine<
         MultiStepFormMachineContext,
         MultiStepFormMachineEvent
     >(
         {
-  id: "state010_rocketeerForm",
-  initial: "state020_enteringRocketeer",
-  states: {
-    state020_enteringRocketeer: {
-      description: "Enter relevent information about applicant",
-      on: {
-        EVENT021_CONFIRM_ROCKETEER: {
-          actions: "action001_assignRocketeerInfoToContext",
-          description: "Confirm applicant's details are correct",
-          target: "state030_enteringDate",
-        },
-      },
-    },
-    state030_enteringDate: {
-      description: "Select date of launch",
-      on: {
-        event031_BACK: {
-          description: "Go back to applicant details, something incorrect",
-          target: "state020_enteringRocketeer",
-        },
-        EVENT032_CONFIRM_DATE: {
-          actions: "assignDateToContext",
-          description: "Confirm date is correct",
-          target: "state040_confirming_with_3rd_party",
-        },
-      },
-    },
-    state040_confirming_with_3rd_party: {
-      initial: "state050_confirming_idle",
-      states: {
-        state050_confirming_idle: {
-          exit: "clearErrorMessage",
-          description: "At the confirmation stage, awaiting 3rd party sign-off",
-          on: {
-            EVENT051_CONFIRM_ALL: {
-              description:
-                "Verify that everything is good on both ours and 3rd party side",
-              target: "state060_confirming_submitting",
+            id: "state010_rocketeerForm",
+            initial: "state020_enteringRocketeer",
+            states: {
+                state020_enteringRocketeer: {
+                    description: "Enter relevent information about applicant",
+                    on: {
+                        EVENT021_CONFIRM_ROCKETEER: {
+                            actions: "action001_assignRocketeerInfoToContext",
+                            description: "Confirm applicant's details are correct",
+                            target: "state030_enteringDate",
+                        },
+                    },
+                },
+                state030_enteringDate: {
+                    description: "Select date of launch",
+                    on: {
+                        EVENT031_BACK: {
+                            description: "Go back to applicant details, something incorrect",
+                            target: "state020_enteringRocketeer",
+                        },
+                        EVENT032_CONFIRM_DATE: {
+                            actions: "assignDateToContext",
+                            description: "Confirm date is correct",
+                            target: "state040_confirming_with_3rd_party",
+                        },
+                    },
+                },
+                state040_confirming_with_3rd_party: {
+                    initial: "state050_confirming_idle",
+                    states: {
+                        state050_confirming_idle: {
+                            exit: "clearErrorMessage",
+                            description: "At the confirmation stage, awaiting 3rd party sign-off",
+                            on: {
+                                EVENT051_CONFIRM_ALL: {
+                                    description:
+                                        "Verify that everything is good on both ours and 3rd party side",
+                                    target: "state060_confirming_submitting",
+                                },
+                                EVENT051_BACK: {
+                                    description:
+                                        "Return from `idle` in `confirming`, perhaps 3rd party rejected or didn't get back in time",
+                                    target: "#state010_rocketeerForm.state030_enteringDate",
+                                },
+                            },
+                        },
+                        state060_confirming_submitting: {
+                            description: "Awaiting to submit application",
+                            invoke: {
+                                src: "EVENT061_SUBMIT",
+                                onDone: [
+                                    {
+                                        description: "Confirm complete and submit application",
+                                        target: "state070_confirming_complete",
+                                    },
+                                ],
+                                onError: [
+                                    {
+                                        actions: "assignErrorMessageToContext",
+                                        description:
+                                            "Something wrong with the submission - go back a step",
+                                        target: "state050_confirming_idle",
+                                    },
+                                ],
+                            },
+                        },
+                        state070_confirming_complete: {
+                            description:
+                                "Confirming everything is sorted (might need external sign-off)",
+                            type: "final",
+                        },
+                    },
+                    onDone: {
+                        description: "Application complete",
+                        target: "state080_success",
+                    },
+                },
+                state080_success: {
+                    description: "All done, ship it and sip it",
+                    type: "final",
+                },
             },
-            EVENT051_BACK: {
-              description:
-                "Return from `idle` in `confirming`, perhaps 3rd party rejected or didn't get back in time",
-              target: "#state010_rocketeerForm.state030_enteringDate",
-            },
-          },
         },
-        state060_confirming_submitting: {
-          description: "Awaiting to submit application",
-          invoke: {
-            src: "EVENT061_SUBMIT",
-            onDone: [
-              {
-                description: "Confirm complete and submit application",
-                target: "state070_confirming_complete",
-              },
-            ],
-            onError: [
-              {
-                actions: "assignErrorMessageToContext",
-                description:
-                  "Something wrong with the submission - go back a step",
-                target: "state050_confirming_idle",
-              },
-            ],
-          },
-        },
-        state070_confirming_complete: {
-          description:
-            "Confirming everything is sorted (might need external sign-off)",
-          type: "final",
-        },
-      },
-      onDone: {
-        description: "Application complete",
-        target: "state080_success",
-      },
-    },
-    state080_success: {
-      description: "All done, ship it and sip it",
-      type: "final",
-    },
-  },
-},
         {
-            services: { submitPayment: () => () => { } },
+            // services: { submitApplication: () => () => { } },
             actions: {
                 assignDateToContext: assign((_context, event) => {
-                    if (event.type !== 'CONFIRM_DATE') return {};
+                    if (event.type !== 'EVENT032_CONFIRM_DATE') return {};
                     return {
                         dateInfo: event.info,
                     };
                 }),
-                assignPayeeInfoToContext: assign((_context, event) => {
-                    if (event.type !== 'CONFIRM_PAYEE') return {};
+                assignRocketeerInfoToContext: assign((_context, event) => {
+                    if (event.type !== 'EVENT021_CONFIRM_ROCKETEER') return {
+                        rocketeerInfo: undefined,
+                    };
                     return {
-                        payeeInfo: event.info,
+                        rocketeerInfo: event.info,
                     };
                 }),
                 assignErrorMessageToContext: assign((_context, event: any) => {
@@ -148,10 +153,6 @@ const multiStepFormMachine =
                         errorMessage: undefined,
                     };
                 }),
-
-                // clearErrorMessage: assign({
-                //     errorMessage: undefined,
-                // }),
             },
         },
     );
@@ -233,9 +234,15 @@ const MultiStepFormMachineComponentStatsCard = () => {
                         />
                     </ThemeIcon>
 
-                    <Title order={1} align='center' >Multi-step form machine component</Title>
+                    <Title
+                        order={1}
+                        align='center'
+                    >Multi-step form machine component</Title>
 
-                    <Title order={2} align='center' ><Badge size="xl">State: {state.value.toString()}</Badge></Title>
+                    <Title
+                        order={2}
+                        align='center'
+                    ><Badge size="xl">State: {state.value.toString()}</Badge></Title>
 
 
                     <Group
@@ -273,14 +280,14 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
 
                     {
-                        state.matches("enteringPayee") &&
+                        state.matches("enteringRocketeer") &&
                         <div>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
                             </p>
 
                             <Button
-                                onClick={() => send("CONFIRM_PAYEE")}
+                                onClick={() => send("EVENT021_CONFIRM_ROCKETEER")}
                                 radius="md"
                             >
                                 Confirm
@@ -304,7 +311,7 @@ const MultiStepFormMachineComponentStatsCard = () => {
                             </p>
                             <div className="inline-flex items-center -space-x-px text-xs rounded-md mt-4 mx-auto sm:pr-8">
                                 <Button
-                                    onClick={() => send("BACK")}
+                                    onClick={() => send("EVENT031_BACK")}
                                 >
                                     Back
                                 </Button>
@@ -314,7 +321,7 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                 </Button>
 
                                 <Button
-                                    onClick={() => send("CONFIRM_DATE")}
+                                    onClick={() => send("EVENT032_CONFIRM_DATE")}
                                 >
                                     Confirm
                                 </Button>
@@ -332,7 +339,9 @@ const MultiStepFormMachineComponentStatsCard = () => {
             </Container>
 
 
-            <iframe src="https://stately.ai/viz/embed/e7109c2c-7048-4d67-85c2-02ad402bf1a6?mode=viz&panel=code&showOriginalLink=1&readOnly=1&pan=1&zoom=2&controls=1" sandbox="allow-same-origin allow-scripts"
+            <iframe
+                src="https://stately.ai/viz/embed/e7109c2c-7048-4d67-85c2-02ad402bf1a6?mode=viz&panel=code&showOriginalLink=1&readOnly=1&pan=1&zoom=2&controls=1"
+                sandbox="allow-same-origin allow-scripts"
 
                 width={'100%'}
                 height={500}
@@ -341,106 +350,15 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
             ></iframe>
 
-        </Container>
-    );
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-const MultiStepFormMachineComponent = () => {
-    const [state, send] = useMachine(multiStepFormMachine);
-
-    return (
-        <div className='mx-40 my-10'>
-
-
-
-
-            <div className="block px-8 py-4 bg-gray-900 border border-gray-800 shadow-xl rounded-xl" >
-                <h2 className="mt-3 text-xl font-bold text-white">Payee input state machine form</h2>
-
-                <strong className="inline-flex items-center border border-gray-200 mt-4 rounded relative px-2.5 py-1.5 ">
-
-                    Status:
-                    <span className="text-green-700 ml-1.5">
-                        {/* {!state.matches("asdf") && <span className=''>{state.value}</span>} */}
-                    </span>
-                </strong>
-
-                <div className="mt-4 text-sm text-gray-300">
-                    {
-                        state.matches("enteringPayee") &&
-                        <div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio eius labore nisi tempore modi vel voluptate ullam nostrum adipisci suscipit eaque quae cupiditate, accusamus minus laboriosam totam laborum, deserunt sint.
-                            </p>
-                            <button
-                                onClick={() => send("CONFIRM_PAYEE")}
-                                className="mt-4 inline-block p-[2px] rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:text-white active:text-opacity-75 focus:outline-none focus:ring"
-                                type="button"
-                            >
-                                <span className="block px-8 py-3 rounded-full hover:bg-transparent">
-                                    Confirm
-                                </span>
-                            </button>
-                        </div>
-                    }
-
-                    {
-                        state.matches("enteringDate") &&
-                        <div>
-                            <p>
-                                Bacon ipsum dolor amet chicken t-bone picanha, andouille meatloaf ham hock short ribs meatball pork loin flank tongue brisket. Burgdoggen ham hock rump sirloin biltong. Doner turducken pork loin, beef shank cow sirloin bacon. Leberkas brisket filet mignon chislic. Strip steak sausage bacon tail, flank swine sirloin salami cow fatback shoulder tenderloin picanha corned beef andouille.<br />
-                                <br />
-                                T-bone doner bresaola chuck. Sirloin alcatra burgdoggen, swine flank chislic meatloaf tri-tip. Pancetta andouille shoulder, meatloaf shankle salami sausage hamburger. Tri-tip andouille shoulder ribeye.
-                            </p>
-                            <div className="inline-flex items-center -space-x-px text-xs rounded-md mt-4 mx-auto sm:pr-8">
-                                <button
-                                    onClick={() => send("BACK")}
-                                    className="px-5 py-3 border rounded-l-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:alert-success"
-                                    type="button"
-                                >
-                                    Back
-                                </button>
-
-                                <button
-                                    className="px-5 py-3 font-medium border hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:alert-info active:opacity-75"
-                                    type="button"
-                                >
-                                    Dunno
-                                </button>
-
-                                <button
-                                    onClick={() => send("CONFIRM_DATE")}
-                                    className="px-5 py-3 font-medium border rounded-r-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:alert-error active:opacity-75"
-                                    type="button"
-                                >
-                                    Confirm
-                                </button>
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </div>
 
             <img
                 src={'https://stately.ai/registry/machines/e7109c2c-7048-4d67-85c2-02ad402bf1a6.png'}
                 alt={'asdf'}
             />
 
-        </div>
+        </Container>
     );
 }
+
 
 export default MultiStepFormMachineComponentStatsCard;
