@@ -215,6 +215,8 @@ import { createStyles, Avatar, Text, Group } from '@mantine/core';
 import { IconPhoneCall, IconAt } from '@tabler/icons';
 
 
+import { DateRangePicker, DateRangePickerValue } from '@mantine/dates';
+
 
 
 
@@ -233,6 +235,12 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
     const nextStep = () => setActive((current) => current + 1);
     const prevStep = () => setActive((current) => current - 1);
+
+
+    const [blastOffDate, setBlastOffDate] = useState<DateRangePickerValue>([
+        new Date(2022, 9, 4),
+        new Date(2022, 9, 23),
+    ]);
 
 
     return (
@@ -325,7 +333,6 @@ const MultiStepFormMachineComponentStatsCard = () => {
                         lineWidth={4}
                         bulletSize={32}
                         mt="xl"
-                        p="xl"
                     >
 
 
@@ -339,7 +346,10 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
 
 
-                                    <Group noWrap m="lg">
+                                    <Group
+                                        noWrap
+                                        m="lg"
+                                    >
                                         <Avatar
                                             src={'https://source.unsplash.com/random/?ugly,girl'}
                                             size={94}
@@ -423,12 +433,24 @@ const MultiStepFormMachineComponentStatsCard = () => {
 
                         <Timeline.Item
                             bullet={<IconCalendar />}
-                            title="Entering blast off date"
+                            title="Entering blast off date range"
                         >
 
                             {
                                 state.matches("state030_enteringDate") &&
                                 <div>
+
+
+
+                                    <DateRangePicker
+                                        m='lg'
+                                        label="Launch window"
+                                        placeholder="Pick dates range"
+                                        value={blastOffDate}
+                                        onChange={setBlastOffDate}
+                                    />
+
+
                                     <Button
                                         onClick={() => {
                                             send("EVENT031_BACK");
@@ -436,7 +458,7 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                         }
                                         }
                                     >
-                                        NO
+                                        Back
                                     </Button>
 
                                     <Button
@@ -446,7 +468,7 @@ const MultiStepFormMachineComponentStatsCard = () => {
                                         }
                                         }
                                     >
-                                        YES
+                                        Confirm temporal anomaly
                                     </Button>
                                 </div>
                             }
