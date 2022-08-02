@@ -66,21 +66,30 @@ const MyApp = (appProps: AppProps & {
             theme={{
                 colorScheme: 'dark',
                 colors: {
-                    // override dark colors to change them for all components
                     dark: [
-                        '#d5d7e0',
+                        '#d5d7e0', // text
                         '#acaebf',
                         '#8c8fa3',
                         '#666980',
                         '#4d4f66',
-                        '#34354a',
+                        '#34354a', // lines
                         '#2b2c3d',
-                        '#1d1e30',
+                        '#1d1e30', // background
                         '#0c0d21',
                         '#01010a',
                     ],
                 },
+                fontFamilyMonospace: '"OCR A", Monaco, Courier, monospace',
+                // headings: { fontFamily: '"Open Sans", sans-serif' },
+                // fontSizes: {
+                //     xs: 10,
+                //     sm: 12,
+                //     md: 14,
+                //     lg: 18,
+                //     xl: 24,
+                // },
             }}
+            
         >
 
 
