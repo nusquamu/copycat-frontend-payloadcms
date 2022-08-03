@@ -1,7 +1,6 @@
 import { createStyles, Group } from '@mantine/core';
 import Link from 'next/link';
 // import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons';
-// import { MantineLogo } from '@mantine/ds';
 import { Logo } from '../../components/Logo';
 
 const useStyles = createStyles((theme) => ({
@@ -27,21 +26,13 @@ const useStyles = createStyles((theme) => ({
             marginTop: theme.spacing.lg,
             marginBottom: theme.spacing.sm,
         },
-    },   
-
-    logoNoText: {
-        kind: 'notext',
-    },
-
-    logoLetterhead: {
-        kind: 'letterhead',
     },
 
 }));
 
 export const Footer: React.FC = () => {
 
-// export default function Footer({ }): JSX.Element {
+    // export default function Footer({ }): JSX.Element {
     const { classes } = useStyles();
 
     return (
@@ -49,9 +40,9 @@ export const Footer: React.FC = () => {
             <div className={classes.inner}>
 
                 <Link href='/'>
-                    <a><Logo kind='notext' /></a>
+                    <a><Logo kind='no-text' /></a>
                 </Link>
-                
+
                 <Group className={classes.links}>
                     Blue Dwarf Space Pty Ltd
                 </Group>
