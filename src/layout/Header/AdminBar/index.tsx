@@ -35,6 +35,7 @@ export const AdminBar: React.FC<{
           logo={(
             <Logo
               color="#ffffff"
+              kind='notext'
             />
           )}
           style={{

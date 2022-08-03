@@ -1,6 +1,6 @@
 import { AddressType } from '@components/Address';
 import { SocialMediaLinksType } from '@components/SocialMediaLinks';
-import { FooterType } from '@root/layout/Footer';
+// import { FooterType } from '@root/layout/Footer';
 import { MainMenuType } from '@root/layout/MainMenu';
 import React, { createContext, useContext } from 'react';
 import { DocFromCMS, LinkFromCMS, PayloadMediaType } from '../../cms/types';
@@ -22,7 +22,7 @@ export type GlobalMeta = {
 
 export interface IGlobals {
   mainMenu: MainMenuType,
-  footer: FooterType,
+//   footer: FooterType,
   meta: GlobalMeta,
   alerts?: AlertsType
 }
@@ -35,7 +35,7 @@ export const GlobalsProvider: React.FC<IGlobals & {
 }> = (props) => {
   const {
     mainMenu,
-    footer,
+    // footer,
     meta,
     children
   } = props;
@@ -44,7 +44,7 @@ export const GlobalsProvider: React.FC<IGlobals & {
     <GlobalsContext.Provider
       value={{
         mainMenu,
-        footer,
+        // footer,
         meta
       }}
     >

@@ -182,7 +182,6 @@ const multiStepFormMachine =
 
 import { ThemeIcon, Badge, Paper, Container, Button, Title, Timeline, Tabs, Blockquote, Alert } from '@mantine/core';
 import { IconRocketOff, IconRocket, IconUser, IconCalendar, IconSend, IconBusinessplan, IconAlertCircle, IconCheck } from '@tabler/icons';
-import { done, doneInvoke, error } from 'xstate/lib/actions';
 import { Card, UnstyledButton, Anchor } from '@mantine/core';
 import {
     IconCreditCard,
@@ -323,8 +322,6 @@ import { IconPhoneCall, IconAt } from '@tabler/icons';
 import { DateRangePicker, DateRangePickerValue } from '@mantine/dates';
 
 import { SimpleGrid } from '@mantine/core';
-import { doneState, errorPlatform } from 'xstate/lib/actionTypes';
-
 
 const MultiStepFormMachineComponentStatsCard = () => {
     const [state, send] = useMachine(multiStepFormMachine);

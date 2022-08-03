@@ -74,7 +74,7 @@ export const getGlobalMeta = async (): Promise<GlobalMeta> => {
 export const getAllGlobals = async (): Promise<IGlobals> => {
   const [
     mainMenu,
-    footer,
+    // footer,
     meta,
     alerts
   ] = await Promise.all([
@@ -86,7 +86,7 @@ export const getAllGlobals = async (): Promise<IGlobals> => {
 
   return {
     mainMenu,
-    footer,
+    // footer,
     meta,
     alerts: alerts.docs
   }

@@ -157,39 +157,39 @@ export const dummyGlobals: IGlobals = {
     },
     contactPage: dummyContactPage
   },
-  footer: {
-    column1: [
-      {
-        appearance: 'primary',
-        useLink: true,
-        label: 'Home',
-        link: {
-          type: 'reference',
-          reference: {
-            relationTo: 'pages',
-            value: dummyHomePage
-          }
-        },
-      },
-      {
-        appearance: 'primary',
-        useLink: true,
-        label: 'Posts',
-        link: {
-          type: 'custom',
-          url: '/posts'
-        },
-      },
-      {
-        appearance: 'primary',
-        useLink: true,
-        label: 'Styleguide',
-        link: {
-          type: 'custom',
-          url: '/styleguide'
-        },
-      },
-    ],
-    column2: []
-  }
+//   footer: {
+//     column1: [
+//       {
+//         appearance: 'primary',
+//         useLink: true,
+//         label: 'Home',
+//         link: {
+//           type: 'reference',
+//           reference: {
+//             relationTo: 'pages',
+//             value: dummyHomePage
+//           }
+//         },
+//       },
+//       {
+//         appearance: 'primary',
+//         useLink: true,
+//         label: 'Posts',
+//         link: {
+//           type: 'custom',
+//           url: '/posts'
+//         },
+//       },
+//       {
+//         appearance: 'primary',
+//         useLink: true,
+//         label: 'Styleguide',
+//         link: {
+//           type: 'custom',
+//           url: '/styleguide'
+//         },
+//       },
+//     ],
+//     column2: []
+//   }
 }
