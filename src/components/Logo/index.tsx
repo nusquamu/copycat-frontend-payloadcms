@@ -10,7 +10,7 @@ export const Logo: React.FC<{
         props.kind = 'notext';
     }
 
-    const logoUrl = "https://bluedwarf.space/assets/blue_dwarf_space_" + props.kind + "_logo.png";
+    const logoUrl = "/blue_dwarf_space_" + props.kind + "_logo.png";
 
     return (
         <div>
