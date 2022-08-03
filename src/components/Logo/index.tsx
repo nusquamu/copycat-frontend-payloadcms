@@ -2,15 +2,17 @@ import React from 'react';
 
 export const Logo: React.FC<{
     color?: string
-    kind?: 'notext' | 'letterhead'
+    kind?: 'no-text' | 'letterhead'
 }> = (props) => {
 
     // TODO: don't hardcode this
     if (!props.kind) {
-        props.kind = 'notext';
+        props.kind = 'no-text';
     }
 
-    const logoUrl = "/blue-dwarf-space-" + props.kind + "_logo.png";
+    const kindSeparator = !props.kind ? '' : '_';
+
+    const logoUrl = "/blue-dwarf-space_logo" + kindSeparator + props.kind + ".png";
 
     return (
         <div>
